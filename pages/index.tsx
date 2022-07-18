@@ -1,27 +1,38 @@
-import styles from '../styles/Home.module.scss'
+
 import type { NextPageContext } from 'next'
+import dynamic from 'next/dynamic'
+import CodeBlock from './notes/CodeBlock'
 
 
-import { Pagination } from 'antd';
+const DynamicComponent = dynamic(() => import('@/pages/notes/test.mdx'))
+
 
 
 export default function Home(props:NextPageContext) {
-  console.log(props)
+
+  const components = {
+    pre: CodeBlock,
+    code:(props)=><b {...props} style={{fontSize:'30px'}}></b>
+  }
   
-  // /notes/first-news
-  return <div className={styles.container}>{require('@/pages/notes/test.mdx').default()}
-  <Pagination defaultCurrent={1} total={50} />;</div>
+
+  return (
+    <DynamicComponent components={components}></DynamicComponent>
+  )
+ 
+
 }
 
 
 export const getStaticProps = async () => {
-  // console.log('我构建了')
-  // console.log(require('@/pages/notes/test.mdx').meta)
+  console.log('我构建了')
+ const cmp =  await import('@/pages/notes/test.mdx').then((res:any) =>  res?.meta)
+ console.log('cmp: ', cmp);
   
   // console.log(readdirSync('./'))
-  
+  // console.log(require('./notes/test.mdx').default);
   return {
-    props: { name: 'cxn' }
-  }
+    props: { name: 'cxn' } 
+  } 
 }
 
