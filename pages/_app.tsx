@@ -2,6 +2,7 @@ import 'antd/dist/antd.min.css'
 import '../styles/globals.scss'
 import Layout from './global/layout'
 import Head  from 'next/head'
+import Script from 'next/script'
 
 import {type AppProps  } from 'next/app'
 
@@ -17,8 +18,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="description"
           content="先测试测试"
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+ 
+    </Head>
+ <Script src='/iconfont.js'></Script>
       <Layout >
       <Component {...pageProps} />
       </Layout>

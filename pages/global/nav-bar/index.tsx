@@ -1,7 +1,6 @@
 import  style  from './navbar.module.scss'
-import nav_link_config from '@/config/nav-link'
 import NvaWidget from './nva-widget'
-
+import nav_conf from '@/constants/nav-link'
 const NavBar = () => {
   
 
@@ -14,32 +13,7 @@ const NavBar = () => {
         <div className={style['navbar-search-box']}>
           <input type={'text'} />
         </div>
-        <div className={style['navbar-link-items']}>
-          <div className={style['navbar-link-item']}>
-            <i>icon</i>
-            <span>
-            分类
-            </span>
-          </div>
-          <div className={style['navbar-link-item']}>
-            <i>icon</i>
-            <span>
-            友链
-            </span>
-          </div>
-          <div className={style['navbar-link-item']}>
-            <i>icon</i>
-            <span>
-            归档
-            </span>
-          </div>
-          <div className={style['navbar-link-item']}>
-            <i>icon</i>
-            <span>
-            关于
-            </span>
-          </div>
-        </div>
+        <NvaWidget.Links conf={nav_conf} />
       </nav>
     </header>
    

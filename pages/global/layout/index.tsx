@@ -8,7 +8,7 @@ interface LayoutIn  {
 }
 
 const Layout:React.FC<LayoutIn> = ({children}) => {
-  console.log('props: ', children);
+
   return (
     <>
       <NavBar  />

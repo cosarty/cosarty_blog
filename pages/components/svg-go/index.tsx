@@ -1,24 +1,27 @@
 import React ,{FC,useMemo} from 'react'
 import { CSSProperties } from 'styled-components'
-
+import {len} from '@/utils'
 
 export interface SvaGoProps {
-  icon: string,
-  style:CSSProperties
+  icon?: string,
+  style?:CSSProperties
 }
 
 const SvgGo:FC<SvaGoProps> = ({icon="",style={}}) => {
   const styleRow = useMemo<CSSProperties>(() => {
 
-    Object.keys(style)
-  const 
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
+    //TODO it is not rigorous here
+    if (len(style)) {
+      return style
+    }
 
-    return style
+    return {
+      width: '1em',
+      height: '1em',
+      verticalAlign: '-0.15',
+      fill: 'currentcolor',
+      overflow:'hidden'
+    }
   },[style])
 
 
