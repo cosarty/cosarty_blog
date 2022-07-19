@@ -1,0 +1,11 @@
+.layout-container {
+  // background-color: rgba($color: #000000, $alpha: 0.3);
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 0;
+  width: 100%;
+}
