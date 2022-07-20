@@ -27,15 +27,11 @@ const SvgGo:FC<SvaGoProps> = ({icon="",style={}}) => {
 
   return (
     <>
-     <div>
-
-     </div>
-    
       <svg
         style={styleRow}
         aria-hidden='true'>
         <use xlinkHref={'#icon-'+icon}></use>
-</svg>
+      </svg>
     </>
   )
 }

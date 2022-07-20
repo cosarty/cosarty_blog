@@ -41,6 +41,11 @@ const MENU_CONFIG = {
 
 }
 
+export type MenuItemType = {
+  name: string,
+  icon: string | boolean,
+  href: string,
+}
 
 export type MenuType = typeof MENU_CONFIG
 

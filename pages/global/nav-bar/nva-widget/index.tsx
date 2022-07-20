@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {Children, FC} from 'react'
 import Image from 'next/image'
 import Avartar from '@/assets/caos_avatar.jpg'
 import style from './nav-widget.module.scss'
@@ -6,6 +6,7 @@ import SvgGo from '@/pages/components/svg-go'
 import { getKey } from '@/utils'
 
 import {NvaLinkProps} from './interface'
+import { MenuItemType } from '@/constants/nav-link'
 
 
 const Logo = () => {
@@ -19,25 +20,26 @@ const Logo = () => {
   </>
 }
 
-const Links:FC<NvaLinkProps> = ({conf}) => {
-  console.log('conf: ', conf);
+const Links: FC<NvaLinkProps> = ({ conf }) => {
+  // const NavSub = (sub:MenuItemType[])=>
+
+
+
   return <div className={style['navbar-link-items']}>
     {getKey(conf).map((key)=>  <div key={key} className={style['navbar-link-item']}>
       <SvgGo icon={conf[key].icon} style={{width:'1.3rem',height:'1.3rem'} } />
     <span>
       {conf[key].name}
-    </span>
+      </span>
+      {/* {conf[key]?.&&NavSub()} */}
   </div>)}
-
- 
 </div>
 }
 
 const Search:FC<{}> = () => {
-
-
   return<>
      <div className={style['navbar-search-box']}>
+          <SvgGo icon='sousuo' style={{height:'1.2rem',width:'1.2rem'}}/>
           <input type={'text'} />
         </div>
   </>

@@ -21,7 +21,7 @@
     border-radius: 8px;
     padding-left: 2rem;
     color: initial;
-    border: 1px solid #eaecef;
+    border: 1px solid var(--nav-search-border);
     font-size: 1rem;
     &:focus {
       box-shadow: 0 0 4px inset pink;
@@ -36,16 +36,26 @@
     align-items: center;
     font-size: 0.8rem;
     font-weight: 600;
-    @media only screen and(max-width:640px) {
+    @media only screen and(max-width:650px) {
       display: none;
     }
   }
   &-item {
-    margin-left: 15px;
+    margin-left: 1.5rem;
     cursor: pointer;
     svg {
       vertical-align: middle;
       margin-right: 5px;
     }
+  }
+}
+
+.navbar-search-box {
+  position: relative;
+  svg {
+    position: absolute;
+    left: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
