@@ -1,5 +1,5 @@
-import type { LINK_TYPE } from '@/constants/nav-link'
 
+import { MenuType } from '@/constants/nav-link'
 export interface NvaLinkProps {
-  conf: LINK_TYPE
+  conf: MenuType
 }

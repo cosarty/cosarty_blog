@@ -18,7 +18,6 @@ const SvgGo:FC<SvaGoProps> = ({icon="",style={}}) => {
     return {
       width: '1em',
       height: '1em',
-      verticalAlign: '-0.15',
       fill: 'currentcolor',
       overflow:'hidden'
     }

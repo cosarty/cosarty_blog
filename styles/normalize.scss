@@ -1,127 +1,179 @@
-html {
-  scroll-behavior: smooth;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
-    Helvetica Neue, sans-serif;
-  // font-size: calc(100vw / 24);
-}
-
-body {
-  font-family: 'Sen', sans-serif;
-  font-weight: normal;
-  font-style: normal;
-  color: rgba(0, 0, 0, 0.7);
-  overflow-x: hidden;
-}
-
 * {
-  margin: 0;
-  padding: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
-
-a:focus,
-input:focus,
-textarea:focus,
-button:focus,
-.btn:focus,
-.btn.focus {
-  text-decoration: none;
-  outline: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-
-a:hover {
-  color: #37c2cc;
-}
-
-a {
-  -webkit-transition: all 0.3s ease-out 0s;
-  -moz-transition: all 0.3s ease-out 0s;
-  -ms-transition: all 0.3s ease-out 0s;
-  -o-transition: all 0.3s ease-out 0s;
-  transition: all 0.3s ease-out 0s;
-}
-
-a,
-a:focus,
-a:hover {
-  text-decoration: none;
-}
-
-i,
-span,
-a {
-  display: inline-block;
-}
-
-audio,
-canvas,
-iframe,
-img,
-svg,
-video {
-  vertical-align: middle;
-}
-
+html,
+body,
 h1,
 h2,
 h3,
-.single-post-header,
-.blog-roll-card-header,
 h4,
 h5,
-h6 {
-  font-weight: 700;
-  margin: 0px;
-}
-
-h1 a,
-h2 a,
-h3 a,
-h4 a,
-h5 a,
-h6 a {
-  color: inherit;
-}
-
-h1 {
-  font-size: 55px;
-}
-
-h2 {
-  font-size: 45px;
-}
-
-h4 {
-  font-size: 20px;
-}
-
-h5 {
-  font-size: 18px;
-}
-
-h6 {
-  font-size: 16px;
-}
-
+h6,
+div,
+dl,
+dt,
+dd,
 ul,
-ol {
-  margin: 0px;
-  padding: 0px;
-  list-style-type: none;
+ol,
+li,
+p,
+blockquote,
+pre,
+hr,
+figure,
+table,
+caption,
+th,
+td,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+menu {
+  margin: 0;
+  padding: 0;
 }
-p {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 25px;
-  margin: 0px;
+header,
+footer,
+section,
+article,
+aside,
+nav,
+hgroup,
+address,
+figure,
+figcaption,
+menu,
+details {
+  display: block;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+caption,
+th {
+  text-align: left;
+  font-weight: normal;
+}
+html,
+body,
+fieldset,
+img,
+iframe,
+abbr {
+  border: 0;
+}
+i,
+cite,
+em,
+var,
+address,
+dfn {
+  font-style: normal;
+}
+[hidefocus],
+summary {
+  outline: 0;
+}
+li {
+  list-style: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small {
+  font-size: 100%;
+}
+sup,
+sub {
+  font-size: 83%;
+}
+pre,
+code,
+kbd,
+samp {
+  font-family: inherit;
+}
+q:before,
+q:after {
+  content: none;
+}
+textarea {
+  overflow: auto;
+  resize: none;
+}
+label,
+summary {
+  cursor: default;
+}
+a,
+button {
+  cursor: pointer;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+em,
+strong,
+b {
+  font-weight: bold;
+}
+del,
+ins,
+u,
+s,
+a,
+a:hover {
+  text-decoration: none;
+}
+body,
+textarea,
+input,
+button,
+select,
+keygen,
+legend {
+  font: 12px/1.14 arial, \5b8b\4f53;
+  color: #333;
+  outline: 0;
+}
+body {
+  background: #fff;
+}
+a,
+a:hover {
+  color: #333;
 }
 
-img {
-  width: 100%;
-  object-fit: contain;
+input {
+  border: none;
+  -moz-appearance: none;
+  -webkit-appearance: none; /*解决ios上按钮的圆角问题*/
+  border-radius: 0; /*解决ios上输入框圆角问题*/
+  outline: medium; /*去掉鼠标点击的默认黄色边框*/
+  background-color: transparent;
+
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+  }
+
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  &[type='number']::-webkit-inner-spin-button,
+  &[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }

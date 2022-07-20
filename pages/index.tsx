@@ -19,7 +19,7 @@ import type { NextPageContext } from 'next'
 export default function Home(props:NextPageContext) {
 
   return <div>
-    初始化
+    {/* 初始化 */}
   </div>
  
 

@@ -1,0 +1,51 @@
+.logo {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  img {
+    border-radius: 50%;
+  }
+  h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 0;
+    margin-left: 5px;
+  }
+}
+
+.navbar-search-box {
+  height: 100%;
+  > input {
+    height: inherit;
+    background-color: white;
+    border-radius: 8px;
+    padding-left: 2rem;
+    color: initial;
+    border: 1px solid #eaecef;
+    font-size: 1rem;
+    &:focus {
+      box-shadow: 0 0 4px inset pink;
+    }
+  }
+}
+
+.navbar-link {
+  &-items {
+    display: inline-flex;
+    height: 100%;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    @media only screen and(max-width:640px) {
+      display: none;
+    }
+  }
+  &-item {
+    margin-left: 15px;
+    cursor: pointer;
+    svg {
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  }
+}

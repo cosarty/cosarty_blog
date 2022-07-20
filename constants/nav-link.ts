@@ -1,22 +1,49 @@
-const NAV_LINK_CONFIG = {
+const MENU_CONFIG = {
   classify: {
-    link_name: '分类',
-    link_icon: 'biaoqian'
+    name: '分类',
+    icon: 'biaoqian',
+    href: ''
   },
   archive: {
-    link_name: '归档',
-    link_icon: 'biaoqian'
+    name: '归档',
+    icon: 'qq',
+    href: ''
   },
   blogroll: {
-    link_name: '友链',
-    link_icon: 'biaoqian'
+    name: '友链',
+    icon: 'weixin',
+    href: ''
   },
   about: {
-    link_name: '关于',
-    link_icon: 'biaoqian'
+    name: '关于',
+    icon: 'biaoqian',
+    href: '',
+    chilren: [
+      {
+        name: '很厉害的文章',
+        icon: false,
+        href: '',
+      }
+    ]
   },
+  collect: {
+    name: '很棒的内容',
+    icon: 'biaoqian',
+    href: '',
+    chilren: [
+      {
+        name: 'vue3',
+        icon: false,
+        href: '',
+      }
+    ]
+  }
+
 }
 
-export type LINK_TYPE = typeof NAV_LINK_CONFIG
 
-export default NAV_LINK_CONFIG
+export type MenuType = typeof MENU_CONFIG
+
+
+export default MENU_CONFIG
+export { MENU_CONFIG } 
