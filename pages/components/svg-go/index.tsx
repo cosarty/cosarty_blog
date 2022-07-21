@@ -4,10 +4,12 @@ import {len} from '@/utils'
 
 export interface SvaGoProps {
   icon?: string,
-  style?:CSSProperties
+  style?: CSSProperties,
+  className?:string
 }
 
-const SvgGo:FC<SvaGoProps> = ({icon="",style={}}) => {
+const SvgGo:FC<SvaGoProps> = ({icon="",style={}, className
+=""}) => {
   const styleRow = useMemo<CSSProperties>(() => {
 
     //TODO it is not rigorous here
@@ -28,9 +30,11 @@ const SvgGo:FC<SvaGoProps> = ({icon="",style={}}) => {
   return (
     <>
       <svg
+        className={className}
         style={styleRow}
         aria-hidden='true'>
-        <use xlinkHref={'#icon-'+icon}></use>
+        <use xlinkHref={'#icon-' + icon}></use>
+        
       </svg>
     </>
   )

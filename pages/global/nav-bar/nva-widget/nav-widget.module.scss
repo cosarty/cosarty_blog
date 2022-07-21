@@ -2,6 +2,7 @@
   height: 100%;
   display: flex;
   align-items: center;
+  cursor: pointer;
   img {
     border-radius: 50%;
   }
@@ -21,10 +22,23 @@
     border-radius: 8px;
     padding-left: 2rem;
     color: initial;
+    width: inherit;
     border: 1px solid var(--nav-search-border);
+    box-sizing: border-box;
     font-size: 1rem;
+    transition: all 0.1s ease;
     &:focus {
       box-shadow: 0 0 4px inset pink;
+    }
+  }
+  @media screen and(max-width:650px) {
+    > input {
+      border: none;
+      width: 0;
+
+      &:focus {
+        width: initial;
+      }
     }
   }
 }
@@ -37,15 +51,72 @@
     font-size: 0.8rem;
     font-weight: 600;
     @media only screen and(max-width:650px) {
-      display: none;
+      // display: none;
+      position: fixed;
+      height: 100%;
+      top: 3.5rem;
+      left: 0;
+      width: 50%;
+      flex-direction: column;
+      box-shadow: 0px 6px 12px -4px rgba(0, 173, 181, 0.8);
+      align-items: flex-start;
+      padding: 13px 0;
     }
   }
   &-item {
-    margin-left: 1.5rem;
+    margin-left: 2rem;
     cursor: pointer;
-    svg {
+    position: relative;
+    > svg {
       vertical-align: middle;
       margin-right: 5px;
+    }
+
+    .arrow {
+      margin-left: 10px;
+      position: absolute;
+      top: 5%;
+      transition: all 0.2s;
+    }
+
+    @media only screen and(max-width:650px) {
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+      .arrow {
+        transform: rotate(-90deg);
+      }
+    }
+    .submenu {
+      display: block;
+      position: absolute;
+      top: 100%;
+      padding-top: 0.6rem;
+      right: -10%;
+      min-width: 100%;
+      box-sizing: border-box;
+      font-weight: 700;
+      background-origin: padding-box;
+
+      ul {
+        border-radius: 10px;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 0 12px rgba(0, 173, 181, 0.8);
+        li {
+          white-space: nowrap;
+          &:not(:last-child) {
+            padding-bottom: 15px;
+          }
+        }
+      }
+
+      @media screen and(max-width:650px) {
+        position: static;
+        ul {
+          box-shadow: none;
+        }
+      }
     }
   }
 }

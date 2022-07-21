@@ -3,8 +3,7 @@ import Image from 'next/image'
 import Avartar from '@/assets/caos_avatar.jpg'
 import style from './nav-widget.module.scss'
 import SvgGo from '@/pages/components/svg-go'
-import { getKey } from '@/utils'
-
+import { getKey, len } from '@/utils'
 import {NvaLinkProps} from './interface'
 import { MenuItemType } from '@/constants/nav-link'
 
@@ -21,18 +20,31 @@ const Logo = () => {
 }
 
 const Links: FC<NvaLinkProps> = ({ conf }) => {
-  // const NavSub = (sub:MenuItemType[])=>
+  const isSub = (sub:MenuItemType[])=>len(sub)!==0
 
+  const NavSub = (sub: MenuItemType[]) => {
 
-
+    return <><div className={style['submenu']}>
+      <ul>
+        {sub.map(m => <li key={m.name}>
+          {m.name}
+        </li>)}
+      </ul>
+    </div></>
+  }
   return <div className={style['navbar-link-items']}>
-    {getKey(conf).map((key)=>  <div key={key} className={style['navbar-link-item']}>
-      <SvgGo icon={conf[key].icon} style={{width:'1.3rem',height:'1.3rem'} } />
-    <span>
-      {conf[key].name}
+    {getKey(conf).map((key) => {
+      const {icon,name,sub} = conf[key] 
+
+      return (<div key={key} className={style['navbar-link-item']}>
+      <SvgGo icon={icon} style={{width:'1.3rem',height:'1.3rem'} } />
+      <span>
+          {name}
+          {isSub(sub) && <SvgGo icon='arrow-down-filling' className={style['arrow']} style={{width:'0.9rem',height:'0.9rem'} }/>}
       </span>
-      {/* {conf[key]?.&&NavSub()} */}
-  </div>)}
+      {isSub(sub)&&NavSub(sub)}
+  </div>)
+    })}
 </div>
 }
 

@@ -2,35 +2,43 @@ const MENU_CONFIG = {
   classify: {
     name: '分类',
     icon: 'biaoqian',
-    href: ''
+    href: '',
+    sub: []
   },
   archive: {
     name: '归档',
     icon: 'qq',
-    href: ''
+    href: '',
+    sub: []
   },
   blogroll: {
     name: '友链',
     icon: 'weixin',
-    href: ''
+    href: '',
+    sub: []
   },
   about: {
     name: '关于',
     icon: 'biaoqian',
     href: '',
-    chilren: [
+    sub: [
       {
         name: '很厉害的文章',
         icon: false,
         href: '',
-      }
+      },
+      {
+        name: '很厉害hen的文章',
+        icon: false,
+        href: '',
+      },
     ]
   },
   collect: {
     name: '很棒的内容',
     icon: 'biaoqian',
     href: '',
-    chilren: [
+    sub: [
       {
         name: 'vue3',
         icon: false,
@@ -45,6 +53,7 @@ export type MenuItemType = {
   name: string,
   icon: string | boolean,
   href: string,
+  sub?: MenuItemType[]
 }
 
 export type MenuType = typeof MENU_CONFIG

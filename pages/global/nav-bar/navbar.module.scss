@@ -14,3 +14,36 @@
 .navbar-link-wrapper {
   display: flex;
 }
+
+.nav-logo-wrapper {
+  display: inline-flex;
+}
+
+.switch-container {
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-left: -10px;
+  display: none;
+  @media screen and (max-width: 650px) {
+    display: block;
+  }
+  div {
+    width: 30px;
+    height: 4px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+  }
+  // &.change {
+  div:nth-child(1) {
+    transform: rotate(-45deg) translate(-9px, 7px);
+  }
+  div:nth-child(2) {
+    opacity: 0;
+  }
+  div:nth-child(3) {
+    transform: rotate(45deg) translate(-7px, -6px);
+  }
+  // }
+}
