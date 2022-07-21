@@ -17,28 +17,19 @@
 .navbar-search-box {
   height: 100%;
   > input {
+    width: 0;
     height: inherit;
     background-color: white;
     border-radius: 8px;
     padding-left: 2rem;
     color: initial;
-    width: inherit;
     border: 1px solid var(--nav-search-border);
     box-sizing: border-box;
     font-size: 1rem;
-    transition: all 0.1s ease;
+    transition: all 0.5s ease;
     &:focus {
       box-shadow: 0 0 4px inset pink;
-    }
-  }
-  @media screen and(max-width:650px) {
-    > input {
-      border: none;
-      width: 0;
-
-      &:focus {
-        width: initial;
-      }
+      width: 12rem;
     }
   }
 }
@@ -56,7 +47,7 @@
       height: 100%;
       top: 3.5rem;
       left: 0;
-      width: 50%;
+      min-width: 50vw;
       flex-direction: column;
       box-shadow: 0px 6px 12px -4px rgba(0, 173, 181, 0.8);
       align-items: flex-start;
@@ -64,20 +55,27 @@
     }
   }
   &-item {
-    margin-left: 2rem;
+    margin-left: 1.3rem;
     cursor: pointer;
     position: relative;
     > svg {
       vertical-align: middle;
       margin-right: 5px;
     }
+    > span {
+      white-space: nowrap;
+    }
 
     .arrow {
       margin-left: 10px;
-      position: absolute;
-      top: 5%;
       transition: all 0.2s;
     }
+
+    // &:hover {
+    //   .submenu {
+    //     display: block;
+    //   }
+    // }
 
     @media only screen and(max-width:650px) {
       &:not(:last-child) {
@@ -88,7 +86,7 @@
       }
     }
     .submenu {
-      display: block;
+      display: none;
       position: absolute;
       top: 100%;
       padding-top: 0.6rem;
@@ -99,10 +97,10 @@
       background-origin: padding-box;
 
       ul {
-        border-radius: 10px;
+        border-radius: 4px;
         padding: 20px;
         background-color: white;
-        box-shadow: 0 0 12px rgba(0, 173, 181, 0.8);
+        box-shadow: 0 0 2px rgba(0, 173, 181, 0.8);
         li {
           white-space: nowrap;
           &:not(:last-child) {

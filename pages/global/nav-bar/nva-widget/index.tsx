@@ -1,4 +1,4 @@
-import {Children, FC} from 'react'
+import { FC, MouseEvent, useEffect, useState} from 'react'
 import Image from 'next/image'
 import Avartar from '@/assets/caos_avatar.jpg'
 import style from './nav-widget.module.scss'
@@ -6,6 +6,7 @@ import SvgGo from '@/pages/components/svg-go'
 import { getKey, len } from '@/utils'
 import {NvaLinkProps} from './interface'
 import { MenuItemType } from '@/constants/nav-link'
+import { useSize } from '@/utils/hooks'
 
 
 const Logo = () => {
@@ -20,38 +21,58 @@ const Logo = () => {
 }
 
 const Links: FC<NvaLinkProps> = ({ conf }) => {
-  const isSub = (sub:MenuItemType[])=>len(sub)!==0
+  const [isMobile, setMobile] = useState(false)
+  const {width} = useSize()
+  const isSub = (sub: MenuItemType[]) => len(sub) !== 0
+  useEffect(() => {
+    setMobile(width < 650)
+  }, [width])
 
-  const NavSub = (sub: MenuItemType[]) => {
+  // render subMenu
+  const NavSub = (sub: MenuItemType[],key:string) => {
 
-    return <><div className={style['submenu']}>
+    return <>
+      <div className={style['submenu']} id={key}>
       <ul>
         {sub.map(m => <li key={m.name}>
           {m.name}
         </li>)}
       </ul>
-    </div></>
+      </div>
+    </>
   }
+
+  const showSubMenu = (key: string, status: string) => {
+    {
+      if (!!isMobile) return 
+      const el = document.getElementById(key)
+      if (el) {el.style.display = status; }
+  }}
+
+
+
+
+
   return <div className={style['navbar-link-items']}>
     {getKey(conf).map((key) => {
-      const {icon,name,sub} = conf[key] 
-
-      return (<div key={key} className={style['navbar-link-item']}>
-      <SvgGo icon={icon} style={{width:'1.3rem',height:'1.3rem'} } />
+      const{name, icon, sub}  = conf[key]
+ 
+      return (<div key={key} className={style['navbar-link-item']}  onMouseEnter={() => showSubMenu(key, 'block')} onMouseLeave={() => showSubMenu(key, 'none')}>
+      <SvgGo icon={icon} style={{width: '1.3rem', height: '1.3rem'} } />
       <span>
           {name}
-          {isSub(sub) && <SvgGo icon='arrow-down-filling' className={style['arrow']} style={{width:'0.9rem',height:'0.9rem'} }/>}
+          {isSub(sub) && <SvgGo icon='arrow-down-filling' className={style['arrow']} style={{width: '0.9rem', height: '0.9rem'} }/>}
       </span>
-      {isSub(sub)&&NavSub(sub)}
+      {isSub(sub) && NavSub(sub,key)}
   </div>)
     })}
 </div>
 }
 
-const Search:FC<{}> = () => {
+const Search: FC<{}> = () => {
   return<>
      <div className={style['navbar-search-box']}>
-          <SvgGo icon='sousuo' style={{height:'1.2rem',width:'1.2rem'}}/>
+          <SvgGo icon='sousuo' style={{height: '1.2rem', width: '1.2rem'}}/>
           <input type={'text'} />
         </div>
   </>
@@ -60,4 +81,4 @@ const Search:FC<{}> = () => {
 
 
 
-export default {Logo,Links,Search}
+export default {Logo, Links, Search}
