@@ -1,0 +1,41 @@
+.blog-item {
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 16px 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: all 0.3s;
+  box-shadow: 0px 6px 24px -4px rgba(0, 173, 181);
+  border-radius: 25px;
+  > .draw {
+    height: 200px;
+    width: 40%;
+    border-radius: 15px;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      transform: scale(1.2);
+      transition: transform 0.6s;
+      &:hover {
+        transform: scale(1);
+      }
+    }
+  }
+  > .content {
+    margin-left: 20px;
+    // color: rgba(255, 255, 255, 0.8);
+    flex-basis: 55%;
+    > h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 30px;
+    }
+    > p {
+      font-size: 1rem;
+      line-height: 20px;
+    }
+  }
+}

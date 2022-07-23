@@ -1,0 +1,29 @@
+.home-blog-wrapper {
+  width: 75%;
+  margin: 0 auto;
+  min-height: 80vh;
+  height: auto;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+
+  @media screen and (max-width: 650px) {
+    width: 85vw;
+  }
+}
+
+.blog-list {
+  width: 100%;
+}
+
+.info-wrapper {
+  flex-basis: 320px;
+  margin-left: 10px;
+  background-color: blueviolet;
+  @media screen and (max-width: 650px) {
+    display: none;
+  }
+}
+.abstract-wrapper {
+  width: 100%;
+}
