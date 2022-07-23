@@ -19,7 +19,7 @@ const Logo = () => {
   )
 }
 
-const Links: FC<NvaLinkProps> = ({ conf }) => {
+const Links: FC<NvaLinkProps> = ({ conf, show }) => {
   const [isMobile, setMobile] = useState(false)
   const { width } = useSize()
   const [activeKey, setActiveKey] = useState<string[]>([])
@@ -68,7 +68,7 @@ const Links: FC<NvaLinkProps> = ({ conf }) => {
   const checkActive = (key: string, checkClass: string) => (activeKey.includes(key) && style[checkClass]) || ''
 
   return (
-    <div className={style['navbar-link-items']}>
+    <div className={`${style['navbar-link-items']} ${show ? style['show-sidebar'] : ''}`}>
       {getKey(conf).map((key) => {
         const { name, icon, sub } = conf[key]
         return (

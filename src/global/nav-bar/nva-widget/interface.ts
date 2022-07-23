@@ -1,5 +1,6 @@
 
 import { MenuType } from '@/constants/nav-link'
 export interface NvaLinkProps {
-  conf: MenuType
+  conf: MenuType,
+  show: boolean
 }
