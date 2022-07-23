@@ -1,7 +1,8 @@
-import type { NextPageContext, GetStaticProps, GetStaticPropsContext } from 'next'
+import type { GetStaticProps } from 'next'
 import HeroBg from '@/components/hero-bg'
 import style from '@/styles/page/home.module.scss'
 import BlogInfo, { type PostInfoModel } from '@/components/blog-info'
+import AuthorCard from '@/components/author-card'
 // import Home from './home'
 // import dynamic from 'next/dynamic'
 // import CodeBlock from './notes/CodeBlock'
@@ -36,7 +37,9 @@ export default function Home({ posts }: HomeProps) {
           {/* 这个留给分页组件 */}
           {/* <div className='pagation pagation'></div> */}
         </div>
-        <div className={style['info-wrapper']}></div>
+        <div className={style['info-wrapper']}>
+          <AuthorCard />
+        </div>
       </div>
     </>
   )

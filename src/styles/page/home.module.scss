@@ -20,6 +20,8 @@
   flex-basis: 320px;
   margin-left: 10px;
   background-color: blueviolet;
+  padding: 15px;
+  height: auto;
   @media screen and (max-width: 650px) {
     display: none;
   }

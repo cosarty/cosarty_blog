@@ -4,14 +4,33 @@
   padding: 16px 20px;
   cursor: pointer;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+
   transition: all 0.3s;
   box-shadow: 0px 6px 24px -4px rgba(0, 173, 181);
   border-radius: 25px;
+  justify-content: flex-start;
+  @media screen and (min-width: 650px) {
+    align-items: center;
+    > .draw {
+      width: 40% !important;
+    }
+    flex-direction: row;
+    > .content {
+      margin-left: 20px;
+    }
+    &:nth-child(even) {
+      flex-direction: row-reverse;
+      > .content {
+        text-align: right;
+        margin-left: 0;
+        margin-right: 20px;
+      }
+    }
+  }
   > .draw {
     height: 200px;
-    width: 40%;
+    width: 100%;
     border-radius: 15px;
     overflow: hidden;
     img {
@@ -25,9 +44,7 @@
     }
   }
   > .content {
-    margin-left: 20px;
-    // color: rgba(255, 255, 255, 0.8);
-    flex-basis: 55%;
+    flex-basis: 60%;
     > h2 {
       font-size: 1.4rem;
       font-weight: 700;
