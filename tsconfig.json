@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "outDir": "/",
     "jsx": "preserve",
-    "target": "esnext",
+    "target": "ES2015",
     "module": "esnext",
     "strict": true,
     "allowJs": true,
@@ -20,6 +20,9 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "~*": [
+        "./*"
       ]
     },
     "skipLibCheck": true,
@@ -36,6 +39,6 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
   ]
 }

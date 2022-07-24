@@ -1,3 +1,12 @@
+import { ReactElement } from 'react';
 import CodeBlock from './code-block';
 
-export { CodeBlock }
+
+
+
+const components = {
+  pre: CodeBlock,
+
+}
+
+export { components }

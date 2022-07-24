@@ -6,6 +6,6 @@ const withMDX = require('@next/mdx')({
   }
 })
 module.exports = withMDX({
-  pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
-  productionBrowserSourceMaps: false
+  pageExtensions: ['ts', 'tsx', 'md', 'mdx']
+  // productionBrowserSourceMaps: false
 })
