@@ -39,6 +39,7 @@ export default function Home({ posts }: HomeProps) {
         </div>
         <div className={style['info-wrapper']}>
           <AuthorCard />
+          <hr />
         </div>
       </div>
     </>

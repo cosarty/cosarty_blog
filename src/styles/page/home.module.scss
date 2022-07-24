@@ -1,3 +1,5 @@
+@import '../mixin/box-show.scss';
+
 .home-blog-wrapper {
   width: 75%;
   margin: 0 auto;
@@ -9,6 +11,12 @@
 
   @media screen and (max-width: 650px) {
     width: 85vw;
+    flex-direction: column;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid #ccc;
   }
 }
 
@@ -19,12 +27,9 @@
 .info-wrapper {
   flex-basis: 320px;
   margin-left: 10px;
-  background-color: blueviolet;
-  padding: 15px;
+  padding: 2rem 15px 1rem;
   height: auto;
-  @media screen and (max-width: 650px) {
-    display: none;
-  }
+  @include box-show;
 }
 .abstract-wrapper {
   width: 100%;
