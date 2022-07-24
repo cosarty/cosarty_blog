@@ -57,7 +57,6 @@ const Links: FC<NvaLinkProps> = ({ conf, show }) => {
   const openMenu = (key: string) => {
     const el = document.getElementById(key)
     if (el && isMobile) {
-      console.log(1)
       setActiveKey((pre) => {
         const idx = pre.indexOf(key)
         return idx === -1 ? [...pre, key] : pre.filter((i) => i !== key)
