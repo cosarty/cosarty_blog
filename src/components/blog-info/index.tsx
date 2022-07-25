@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import style from './blog-info.module.scss'
@@ -8,7 +9,7 @@ const BlogInfo: FC<{ postInfo: PostInfoModel; src: string }> = ({ postInfo, src 
     <Link href={{ pathname: '/blog/[slug]', query: { slug: src } }}>
       <div className={style['blog-item']}>
         <div className={style['draw']}>
-          <img src={previewImg} />
+          <img src={previewImg} alt="错误" />
         </div>
         <div className={style['content']}>
           <h2>{title}</h2>

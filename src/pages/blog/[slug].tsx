@@ -5,6 +5,7 @@ import { FC } from 'react'
 import { useRouter } from 'next/router'
 import { getNotesKey, checkNotesKey, getNoteMeta } from '~lib/api'
 import MdxWidget from '@/components/mdx-widget'
+
 const DynamicComponent = (key: string) => dynamic(() => import(`~posts/notes/${key}.mdx`))
 
 interface BlogPostProps {
@@ -18,7 +19,8 @@ const BlogPost: FC<BlogPostProps> = ({ meta }) => {
   const Blog = DynamicComponent(query.slug as string)
   return (
     <>
-      <Blog components={MdxWidget}></Blog>{' '}
+      {/*  @ts-ignore */}
+      <Blog components={MdxWidget}></Blog>
     </>
   )
 }

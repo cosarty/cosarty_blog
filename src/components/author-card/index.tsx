@@ -7,7 +7,7 @@ const AuthorCard = () => {
   return (
     <div className={style['author-card']}>
       <div className={style['personal-info-wrapper']}>
-        <Image src={Avartar} width={100} height={100} />
+        <Image src={Avartar} width={100} height={100} alt="头像" />
         <h3 className={style['name']}>蔡夏柠</h3>
         <div className={style['num']}>
           <div>

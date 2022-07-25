@@ -19,6 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Script src="/iconfont.js"></Script>
+      <Script src="/ribbon.js"></Script>
       <Layout>
         <Component {...pageProps} />
       </Layout>

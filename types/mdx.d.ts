@@ -1,6 +1,6 @@
 
 declare module '*.mdx' {
-  let MDXComponent: (props: any) => JSX.Element
+  let MDXComponent: (props: Record<string, any> & { components: any }) => JSX.Element
   export const meta: PostInfoModel = {}
   export default MDXComponent
 }
