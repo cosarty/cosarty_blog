@@ -15,6 +15,7 @@ class CxnBlogMeta {
     for (const note of notesList) {
       const noteKey = note.replace('.mdx', '')
       const { meta } = await import(`~posts/notes/${note}`)
+
       this.metaList.set(noteKey, meta)
     }
     this.genTags()

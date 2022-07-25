@@ -8,8 +8,6 @@
   margin-top: 30px;
   display: flex;
   flex-direction: row;
-  position: static;
-  top: 70px;
   @media screen and (max-width: 650px) {
     width: 85vw;
     flex-direction: column;
@@ -30,6 +28,7 @@
   margin-left: 10px;
   padding: 2rem 15px 1rem;
   height: auto;
+
   @include box-show;
 }
 .abstract-wrapper {
