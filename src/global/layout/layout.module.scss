@@ -1,5 +1,7 @@
+@import '../../styles/mixin/box-show.scss';
+
 .layout-container {
-  padding-top: 3.6rem;
+  padding-top: 2rem;
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
@@ -9,4 +11,37 @@
   padding-bottom: 30px;
 
   // background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+}
+
+.home-blog-wrapper {
+  width: 75%;
+  margin: 0 auto;
+  min-height: 100vh;
+  height: auto;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  @media screen and (max-width: 650px) {
+    width: 85vw;
+    flex-direction: column;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+  }
+}
+
+.blog-list {
+  width: 100%;
+}
+
+.info-wrapper {
+  flex-basis: 320px;
+  margin-left: 10px;
+  padding: 2rem 15px 1rem;
+  height: auto;
+  background-color: var(--card-box-bg);
+
+  @include box-show;
 }

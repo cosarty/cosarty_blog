@@ -2,7 +2,7 @@
 .blog-item {
   margin-bottom: 20px;
   width: 100%;
-  padding: 16px 20px;
+
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -12,6 +12,7 @@
 
   border-radius: 10px;
   justify-content: flex-start;
+  overflow: hidden;
   @include box-show;
   @media screen and (min-width: 650px) {
     align-items: center;
@@ -24,6 +25,7 @@
     }
     &:nth-child(even) {
       flex-direction: row-reverse;
+
       > .content {
         text-align: right;
         margin-left: 0;
@@ -32,9 +34,9 @@
     }
   }
   > .draw {
-    height: 200px;
+    height: 250px;
     width: 100%;
-    border-radius: 15px;
+    // border-radius: 15px;
     overflow: hidden;
     img {
       width: 100%;

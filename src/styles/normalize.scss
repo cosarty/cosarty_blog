@@ -38,6 +38,7 @@ textarea,
 menu {
   margin: 0;
   padding: 0;
+  color: var(--text-highlight-color);
 }
 header,
 footer,
@@ -146,8 +147,7 @@ button,
 select,
 keygen,
 legend {
-  font: 12px/1.14 arial, \5b8b\4f53;
-  color: #333;
+  color: var(--text-highlight-color);
   outline: 0;
 }
 body {

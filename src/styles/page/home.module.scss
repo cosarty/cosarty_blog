@@ -1,37 +1,3 @@
-@import '../mixin/box-show.scss';
-
-.home-blog-wrapper {
-  width: 75%;
-  margin: 0 auto;
-  min-height: 100vh;
-  height: auto;
-  margin-top: 30px;
-  display: flex;
-  flex-direction: row;
-  @media screen and (max-width: 650px) {
-    width: 85vw;
-    flex-direction: column;
-  }
-
-  hr {
-    border: 0;
-    border-top: 1px solid #ccc;
-  }
-}
-
-.blog-list {
-  width: 100%;
-}
-
-.info-wrapper {
-  flex-basis: 320px;
-  margin-left: 10px;
-  padding: 2rem 15px 1rem;
-  height: auto;
-  background-color: var(--card-box-bg);
-
-  @include box-show;
-}
 .abstract-wrapper {
   width: 100%;
 }

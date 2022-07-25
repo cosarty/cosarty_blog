@@ -5,7 +5,8 @@ import { FC } from 'react'
 import { useRouter } from 'next/router'
 import { getNotesKey, checkNotesKey, getNoteMeta } from '~lib/api'
 import MdxWidget from '@/components/mdx-widget'
-
+import Layout from '@/global/layout'
+import { useImge } from '@/utils/hooks'
 const DynamicComponent = (key: string) => dynamic(() => import(`~posts/notes/${key}.mdx`))
 
 interface BlogPostProps {
@@ -17,10 +18,13 @@ const BlogPost: FC<BlogPostProps> = ({ meta }) => {
   const { query } = useRouter()
 
   const Blog = DynamicComponent(query.slug as string)
+
   return (
     <>
-      {/*  @ts-ignore */}
-      <Blog components={MdxWidget}></Blog>
+      <Layout heroSrc={`blog/${meta.previewImg}`} topHeight={60} topfixed={false}>
+        {/*  @ts-ignore */}
+        <Blog components={MdxWidget}></Blog>
+      </Layout>
     </>
   )
 }
@@ -34,7 +38,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   if (!(await checkNotesKey(params.slug))) return { notFound: true }
-  console.log('params.slug: ', params.slug)
   return {
     props: { meta: getNoteMeta(params.slug) }
   }

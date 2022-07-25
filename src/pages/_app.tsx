@@ -1,9 +1,10 @@
 import 'antd/dist/antd.min.css'
 import '../styles/globals.scss'
-import Layout from '../global/layout'
+
 import Head from 'next/head'
 import Script from 'next/script'
 import App from 'next/app'
+import NavBar from '@/global/nav-bar'
 import { AppContext } from 'next/app'
 
 import { type AppProps } from 'next/app'
@@ -20,9 +21,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <Script src="/iconfont.js"></Script>
       <Script src="/ribbon.js"></Script>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <NavBar />
+      <Component {...pageProps} />
     </>
   )
 }

@@ -22,9 +22,7 @@
         text-align: center;
         flex: 1;
         cursor: pointer;
-        &:not(:last-child) {
-          border-right: 1px solid rgba($color: #333, $alpha: 0.6);
-        }
+
         > h3 {
           line-height: 1;
           font-size: 1.3rem;
