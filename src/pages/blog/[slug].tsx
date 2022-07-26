@@ -3,7 +3,7 @@ import { GetStaticPaths } from 'next'
 import dynamic from 'next/dynamic'
 import { FC } from 'react'
 import { useRouter } from 'next/router'
-import { getNotesKey, checkNotesKey, getNoteMeta } from '~/lib/api'
+import { getNotesKey, checkNotesKey, getNoteMeta, genNotesList } from '~/lib/api'
 import MdxWidget from '@/components/mdx-widget'
 import Layout from '@/global/layout'
 const DynamicComponent = (key: string) => dynamic(() => import(`~/posts/notes/${key}.mdx`))
@@ -28,6 +28,7 @@ const BlogPost: FC<BlogPostProps> = ({ meta }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  await genNotesList()
   const paths = (await getNotesKey()).map((key) => ({ params: { slug: key } }))
   return {
     paths,
@@ -35,6 +36,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 export const getStaticProps: GetStaticProps = async ({ params }: any) => {
+  await genNotesList()
   if (!(await checkNotesKey(params.slug))) return { notFound: true }
   return {
     props: { meta: getNoteMeta(params.slug) }

@@ -8,14 +8,17 @@ import { NvaLinkProps } from './interface'
 import { MenuItemType } from '@/constants/nav-link'
 import { useSize } from '@/utils/hooks'
 import AuthorCard from '@/components/author-card'
+import Link from 'next/link'
 
 const Logo = () => {
   return (
     <>
-      <div className={style['logo']}>
-        <Image src={Avartar} width={40} height={40}></Image>
-        <h2>cos</h2>
-      </div>
+      <Link href="/">
+        <div className={style['logo']}>
+          <Image src={Avartar} width={40} height={40}></Image>
+          <h2>cos</h2>
+        </div>
+      </Link>
     </>
   )
 }

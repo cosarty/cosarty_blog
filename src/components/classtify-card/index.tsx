@@ -2,9 +2,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
 import style from './classtify-card.module.scss'
-const ClasstifyCard: FC<{ classtify?: [string, string[]][]; direction?: 'column' | 'row' }> = ({
+const ClasstifyCard: FC<{ classtify?: [string, string[]][]; direction?: 'column' | 'row'; current?: string }> = ({
   classtify,
-  direction = 'column'
+  direction = 'column',
+  current
 }) => {
   const router = useRouter()
   return (
@@ -14,12 +15,13 @@ const ClasstifyCard: FC<{ classtify?: [string, string[]][]; direction?: 'column'
           {classtify?.map(([name, post]) => (
             <li
               key={name}
-              className={style['category-item']}
+              className={`${style['category-item']} ${current === name ? style['category-active'] : ''}`}
               onClick={() => {
-                router.push({ pathname: '/category/[classtify]', query: { classtify: name } })
+                router.push({ pathname: '/category/[classtify]', query: { classtify: name } }, undefined)
               }}
             >
               <span className={style['category-name']}>{name}</span>
+
               <span className={style['post-num']}>{post.length}</span>
             </li>
           ))}

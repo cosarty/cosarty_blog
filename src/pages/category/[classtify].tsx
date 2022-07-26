@@ -1,6 +1,6 @@
 import style from '@/styles/page/category.module.scss'
 import ClasstifyCard from '@/components/classtify-card'
-import { checkClasskey, genNotesList, getClassKey, getClassNotes, getClasstifyList } from '~/lib/api'
+import { checkClasskey, getClassKey, getClassNotes, getClasstifyList } from '~/lib/api'
 import { FC } from 'react'
 import BlogInfo from '@/components/blog-info'
 import { useRouter } from 'next/router'
@@ -12,12 +12,11 @@ type ClasstifyProps = {
 
 const Classtify: FC<ClasstifyProps> = ({ classtify = [], posts }) => {
   const { query } = useRouter()
-  console.log('query: ', query)
   return (
     <>
       <div className={style['category-weapper']}>
         <div className={style['category-top']}>
-          <ClasstifyCard classtify={classtify} direction="row"></ClasstifyCard>
+          <ClasstifyCard classtify={classtify} direction="row" current={query.classtify as string}></ClasstifyCard>
         </div>
         <div>
           {posts.map(([filename, meta], i) => (
@@ -30,6 +29,7 @@ const Classtify: FC<ClasstifyProps> = ({ classtify = [], posts }) => {
 }
 
 export const getStaticPaths = async () => {
+  await getClasstifyList()
   const paths = (await getClassKey()).map((key: string) => ({ params: { classtify: key } }))
 
   return {
@@ -38,11 +38,10 @@ export const getStaticPaths = async () => {
   }
 }
 export const getStaticProps = async ({ params }: any) => {
-  console.log('await check: ', await checkClasskey(params.classtify))
+  const classtify = await getClasstifyList()
   if (!(await checkClasskey(params.classtify))) return { notFound: true }
-
   return {
-    props: { posts: await getClassNotes(params.classtify), classtify: await getClassKey() }
+    props: { posts: await getClassNotes(params.classtify), classtify }
   }
 }
 

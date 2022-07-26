@@ -17,6 +17,9 @@
         box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.6);
         transform: translateY(-1px);
       }
+      &.category-active {
+        background-color: #f8e71c;
+      }
       .category-name {
         margin-right: 0.5rem;
       }

@@ -2,10 +2,13 @@ import Link from 'next/link'
 import { FC } from 'react'
 import style from './blog-info.module.scss'
 import { useImge } from '@/utils/hooks'
+import { useEffect } from 'react'
 
 const BlogInfo: FC<{ postInfo: PostInfoModel; src: string }> = ({ postInfo, src }) => {
   const { previewImg, description, title, date, classtify, author } = postInfo
+
   const imgSrc = useImge(`blog/${previewImg}`)
+
   return (
     <Link href={{ pathname: '/blog/[slug]', query: { slug: src } }}>
       <div className={style['blog-item']}>

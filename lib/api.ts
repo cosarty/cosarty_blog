@@ -1,6 +1,6 @@
-import { readdirSync } from 'fs-extra'
+import { readdirSync } from 'fs'
 import { NOTES_PATH } from '@/constants'
-import { len } from '@/utils'
+
 
 let metaList: Map<string, PostInfoModel> = new Map()
 let classtify: Map<string, string[]> = new Map()
@@ -9,7 +9,6 @@ export const genNotesList = async () => {
   const notesList = readdirSync(NOTES_PATH)
   for (const note of notesList) {
     const noteKey = note.replace('.mdx', '')
-    console.log('noteKey: ', noteKey);
     const { meta } = await import(`~/posts/notes/${note}`)
     metaList.set(noteKey, meta)
   }
@@ -19,7 +18,10 @@ export const genNotesList = async () => {
 
 export const getNotesKey = async () => [...metaList.keys()]
 export const getClasstifyList = async () => {
-  if (!len(metaList)) { await genNotesList() }
+
+  if (classtify.size) return [...classtify]
+
+  if (!metaList.size) { await genNotesList() }
   for (const [k, v] of metaList) {
     const cur = classtify.get(v.classtify)
     if (Array.isArray(cur)) {
@@ -33,7 +35,6 @@ export const getClasstifyList = async () => {
   return [...classtify];
 }
 export const getClassKey = async () => [...classtify.keys()]
-
 
 export const checkNotesKey = async (key: string) => (await getNotesKey()).includes(key)
 export const checkClasskey = async (key: string) => (await getClassKey()).includes(key)
