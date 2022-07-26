@@ -42,7 +42,7 @@
     align-items: center;
     font-size: 0.8rem;
     font-weight: 600;
-    @media only screen and(max-width:650px) {
+    @media only screen and (max-width: 650px) {
       // display: none;
       position: fixed;
       height: 100%;
@@ -80,7 +80,7 @@
       transition: all 0.2s;
       background-color: var(--text-highlight-color);
     }
-    @media only screen and(max-width:650px) {
+    @media only screen and (max-width: 650px) {
       &:not(:last-child) {
         margin-bottom: 10px;
       }
@@ -119,7 +119,7 @@
         }
       }
 
-      @media screen and(max-width:650px) {
+      @media screen and (max-width: 650px) {
         position: static;
         &.openMenu {
           display: block !important;

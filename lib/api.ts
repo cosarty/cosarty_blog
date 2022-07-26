@@ -1,4 +1,4 @@
-import { readdirSync } from 'fs'
+import { readdirSync } from 'fs-extra'
 import { NOTES_PATH } from '@/constants'
 import { len } from '@/utils'
 
