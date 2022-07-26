@@ -6,7 +6,6 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  background-color: var(--card-box-bg);
 
   transition: all 0.3s;
 
@@ -18,6 +17,7 @@
     align-items: center;
     > .draw {
       width: 40% !important;
+      height: 250px;
     }
     flex-direction: row;
     > .content {
@@ -34,8 +34,8 @@
     }
   }
   > .draw {
-    height: 250px;
-    width: 100%;
+    width: 90%;
+    height: 200px;
     // border-radius: 15px;
     overflow: hidden;
     img {

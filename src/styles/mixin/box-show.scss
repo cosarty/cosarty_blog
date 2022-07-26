@@ -1,6 +1,7 @@
 @mixin box-show {
   transition: all 0.5s ease;
   box-shadow: var(--box-shadow);
+  background-color: var(--card-box-bg);
   &:hover {
     box-shadow: var(--box-hover-shadow);
     transform: translateY(-4px);

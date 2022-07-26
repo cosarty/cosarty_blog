@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 
-const getImagModule = async (key: string | string[]) => {
+const getImagModule: (key: string) => Promise<any> = async (key: string) => {
   try {
 
     return await import(`@/assets/${key}`)
@@ -14,9 +14,11 @@ const getImagModule = async (key: string | string[]) => {
 const useImge = (src: string): string => {
   // 获取图片资源
   const [imgSrc, SetImgSrc] = useState('')
-  getImagModule(src).then((res) => {
-    SetImgSrc(res.default.src)
-  })
+  useEffect(() => {
+    getImagModule(src).then((res) => {
+      SetImgSrc(res.default.src)
+    })
+  }, [])
 
   return imgSrc
 }
