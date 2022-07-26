@@ -7,6 +7,7 @@ import { getKey, len } from '@/utils'
 import { NvaLinkProps } from './interface'
 import { MenuItemType } from '@/constants/nav-link'
 import { useSize } from '@/utils/hooks'
+import AuthorCard from '@/components/author-card'
 
 const Logo = () => {
   return (
@@ -68,6 +69,7 @@ const Links: FC<NvaLinkProps> = ({ conf, show }) => {
 
   return (
     <div className={`${style['navbar-link-items']} ${show ? style['show-sidebar'] : ''}`}>
+      {isMobile && <AuthorCard />}
       {getKey(conf).map((key) => {
         const { name, icon, sub } = conf[key]
         return (

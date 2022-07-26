@@ -1,7 +1,5 @@
 .author-card {
-  @media screen and (max-width: 650px) {
-    display: none;
-  }
+  width: inherit;
   .personal-info-wrapper {
     text-align: center;
 

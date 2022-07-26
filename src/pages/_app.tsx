@@ -6,6 +6,7 @@ import Script from 'next/script'
 import App from 'next/app'
 import NavBar from '@/global/nav-bar'
 import { AppContext } from 'next/app'
+import Provider from '@/global/provider'
 
 import { type AppProps } from 'next/app'
 
@@ -21,6 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <Script src="/iconfont.js"></Script>
       <Script src="/ribbon.js"></Script>
+
       <NavBar />
       <Component {...pageProps} />
     </>

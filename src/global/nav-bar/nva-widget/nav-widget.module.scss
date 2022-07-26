@@ -46,18 +46,18 @@
       position: fixed;
       height: 100%;
       top: 3.2rem;
-      left: 0;
-      min-width: 12rem;
+      left: -100%;
+      min-width: 14rem;
       flex-direction: column;
       box-shadow: 0px 6px 12px -4px rgba(0, 173, 181, 0.8);
       align-items: flex-start;
-      padding: 13px 0;
-      transform: translateX(-100%);
+      padding: 13px 10px;
+
       overflow: hidden;
-      transition: transform 0.45s ease-in-out;
+      transition: left 0.45s ease-in-out;
       background-color: var(--card-box-bg);
       &.show-sidebar {
-        transform: translateX(0);
+        left: 0;
       }
     }
   }
@@ -77,6 +77,7 @@
     .arrow {
       margin-left: 10px;
       transition: all 0.2s;
+      background-color: var(--text-highlight-color);
     }
     @media only screen and(max-width:650px) {
       &:not(:last-child) {
@@ -87,8 +88,6 @@
         &.down-arrow {
           transform: rotate(0);
         }
-      }
-      .arrow {
       }
     }
     .submenu {
@@ -104,11 +103,15 @@
 
       ul {
         border-radius: 4px;
-        padding: 20px;
-        background-color: white;
+        overflow: hidden;
+        background-color: var(--card-box-bg);
         box-shadow: 0 0 2px rgba(0, 173, 181, 0.8);
         li {
           white-space: nowrap;
+          padding: 10px 20px;
+          &:hover {
+            background-color: var(--btn-bg);
+          }
           &:not(:last-child) {
             padding-bottom: 15px;
           }
@@ -122,7 +125,7 @@
         }
         ul {
           box-shadow: none;
-          padding: 10px;
+          // padding: 10px;
         }
       }
     }
