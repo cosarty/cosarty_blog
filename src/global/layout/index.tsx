@@ -11,9 +11,10 @@ interface LayoutIn {
   topHeight?: number
   topfixed?: boolean
   isPosts?: boolean
+  classtify?: [string, string[]][]
 }
 
-const Layout: React.FC<LayoutIn> = ({ children, heroSrc, topHeight, topfixed, isPosts }) => {
+const Layout: React.FC<LayoutIn> = ({ children, heroSrc, topHeight, topfixed, isPosts, classtify = [] }) => {
   const [isMobile, setMobile] = useState(false)
   const { width } = useSize()
   useEffect(() => {
@@ -28,7 +29,7 @@ const Layout: React.FC<LayoutIn> = ({ children, heroSrc, topHeight, topfixed, is
           <div className={style['info-wrapper']}>
             {!isMobile && <AuthorCard />}
             <hr />
-            <ClasstifyCard />
+            <ClasstifyCard classtify={classtify} />
           </div>
         </div>
       </div>

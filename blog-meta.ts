@@ -3,8 +3,8 @@ import { readdirSync } from 'fs-extra'
 
 
 class CxnBlogMeta {
-  private classtify: Set<string> = new Set<string>()
-  private tags: Set<string> = new Set<string>(['dsa'])
+  private classtify: Map<string, string[]> = new Map()
+  private tags: Map<string, string[]> = new Map()
   private metaList: Map<string, PostInfoModel> = new Map()
 
   constructor() {
@@ -24,14 +24,27 @@ class CxnBlogMeta {
 
 
   private async genClasstify() {
-    for (const [, v] of this.metaList) {
-      this.classtify.add(v.classtify)
+    for (const [k, v] of this.metaList) {
+      const cur = this.classtify.get(v.classtify)
+      if (Array.isArray(cur)) {
+        this.classtify.set(v.classtify, [...cur, k])
+      } else {
+        this.classtify.set(v.classtify, [k])
+      }
     }
   }
 
   private genTags() {
-    for (const [, v] of this.metaList) {
-      v.tag?.map(i => this.tags.add(i))
+    for (const [k, v] of this.metaList) {
+      for (const key of v.tag!) {
+        const cur = this.classtify.get(key)
+        if (Array.isArray(cur)) {
+          this.tags.set(key, [...cur, k])
+        } else {
+          this.tags.set(key, [k])
+        }
+      }
+
     }
   }
 

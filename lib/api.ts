@@ -6,7 +6,6 @@ export const genNotesList = async () => {
   return [...BlogMeta.getMetaList]
 }
 
-
 export const getNotesKey = async () => {
   return [...BlogMeta.getMetaList.keys()]
 }
@@ -15,3 +14,6 @@ export const getNotesKey = async () => {
 export const checkNotesKey = async (key: string) => (await getNotesKey()).includes(key)
 
 export const getNoteMeta = (key: string) => BlogMeta.getMetaList.get(key)
+
+
+export const getClasstifyList = () => [...BlogMeta.getClasstify]
