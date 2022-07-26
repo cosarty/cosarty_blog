@@ -6,7 +6,6 @@ import { useRouter } from 'next/router'
 import { getNotesKey, checkNotesKey, getNoteMeta } from '~lib/api'
 import MdxWidget from '@/components/mdx-widget'
 import Layout from '@/global/layout'
-import { useImge } from '@/utils/hooks'
 const DynamicComponent = (key: string) => dynamic(() => import(`~posts/notes/${key}.mdx`))
 
 interface BlogPostProps {
@@ -21,7 +20,7 @@ const BlogPost: FC<BlogPostProps> = ({ meta }) => {
 
   return (
     <>
-      <Layout heroSrc={`blog/${meta.previewImg}`} topHeight={60} topfixed={false}>
+      <Layout heroSrc={`blog/${meta.previewImg}`} topHeight={60} topfixed={false} isPosts>
         {/*  @ts-ignore */}
         <Blog components={MdxWidget}></Blog>
       </Layout>

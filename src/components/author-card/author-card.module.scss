@@ -4,8 +4,16 @@
     text-align: center;
 
     img {
+      cursor: pointer;
+      margin: 5px;
       border-radius: 50%;
+
+      transition: 0.5s;
+      &:hover {
+        transform: rotate(720deg);
+      }
     }
+
     h3 {
       font-size: 1rem;
       line-height: 2;

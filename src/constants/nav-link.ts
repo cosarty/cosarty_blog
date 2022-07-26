@@ -21,18 +21,7 @@ const MENU_CONFIG = {
     name: '关于',
     icon: 'weixin',
     href: '',
-    sub: [
-      {
-        name: '很厉害的文章',
-        icon: false,
-        href: '',
-      },
-      {
-        name: '很厉害hen的文章',
-        icon: false,
-        href: '',
-      },
-    ]
+    sub: []
   },
   collect: {
     name: '很棒的内容',

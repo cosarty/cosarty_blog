@@ -3,15 +3,17 @@ import HeroBg from '@/components/hero-bg'
 import style from './layout.module.scss'
 import AuthorCard from '@/components/author-card'
 import { useSize } from '@/utils/hooks'
+import ClasstifyCard from '@/components/classtify-card'
 
 interface LayoutIn {
   children: React.ReactElement
   heroSrc?: string
   topHeight?: number
   topfixed?: boolean
+  isPosts?: boolean
 }
 
-const Layout: React.FC<LayoutIn> = ({ children, heroSrc, topHeight, topfixed }) => {
+const Layout: React.FC<LayoutIn> = ({ children, heroSrc, topHeight, topfixed, isPosts }) => {
   const [isMobile, setMobile] = useState(false)
   const { width } = useSize()
   useEffect(() => {
@@ -26,6 +28,7 @@ const Layout: React.FC<LayoutIn> = ({ children, heroSrc, topHeight, topfixed }) 
           <div className={style['info-wrapper']}>
             {!isMobile && <AuthorCard />}
             <hr />
+            <ClasstifyCard />
           </div>
         </div>
       </div>
