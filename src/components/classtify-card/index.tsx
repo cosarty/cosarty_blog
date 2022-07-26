@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
 import style from './classtify-card.module.scss'

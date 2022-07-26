@@ -5,6 +5,8 @@ import { NOTES_PATH } from '@/constants'
 let metaList: Map<string, PostInfoModel> = new Map()
 let classtify: Map<string, string[]> = new Map()
 let tags: Map<string, string[]> = new Map()
+
+
 export const genNotesList = async () => {
   const notesList = readdirSync(NOTES_PATH)
   for (const note of notesList) {
@@ -15,8 +17,6 @@ export const genNotesList = async () => {
   return [...metaList]
 }
 
-
-export const getNotesKey = async () => [...metaList.keys()]
 export const getClasstifyList = async () => {
 
   if (classtify.size) return [...classtify]
@@ -34,25 +34,38 @@ export const getClasstifyList = async () => {
 
   return [...classtify];
 }
-export const getClassKey = async () => [...classtify.keys()]
 
+export const getTagsList = async () => {
+  if (tags.size) return [...tags]
+  if (!metaList.size) { await genNotesList() }
+  for (const [k, v] of metaList) {
+    for (const key of v.tag!) {
+      const cur = tags.get(key)
+      if (Array.isArray(cur)) {
+        tags.set(key, [...cur, k])
+      } else {
+        tags.set(key, [k])
+      }
+    }
+
+  }
+  return [...tags];
+}
+
+export const getClassKey = async () => [...classtify.keys()]
+export const getTagsKey = async () => [...tags.keys()]
+export const getNotesKey = async () => [...metaList.keys()]
 export const checkNotesKey = async (key: string) => (await getNotesKey()).includes(key)
 export const checkClasskey = async (key: string) => (await getClassKey()).includes(key)
+export const checkTag = async (key: string) => (await getTagsKey()).includes(key)
 
 export const getNoteMeta = (key: string) => metaList.get(key)
 
 // 获取指定分类的文章
 export const getClassNotes = async (key: string) => [...metaList].filter(([n]) => classtify.get(key)?.includes(n))
 
+export const gettagNotes = async (key: string) => [...tags].filter(([n]) => tags.get(key)?.includes(n))
 
-// for (const [k, v] of this.metaList) {
-//   for (const key of v.tag!) {
-//     const cur = this.classtify.get(key)
-//     if (Array.isArray(cur)) {
-//       this.tags.set(key, [...cur, k])
-//     } else {
-//       this.tags.set(key, [k])
-//     }
-//   }
 
-// }
+
+

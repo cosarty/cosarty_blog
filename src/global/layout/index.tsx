@@ -4,6 +4,7 @@ import style from './layout.module.scss'
 import AuthorCard from '@/components/author-card'
 import { useSize } from '@/utils/hooks'
 import ClasstifyCard from '@/components/classtify-card'
+import TagsCard from '@/components/tags-card'
 
 interface LayoutIn {
   children: React.ReactElement
@@ -12,9 +13,10 @@ interface LayoutIn {
   topfixed?: boolean
   isPosts?: boolean
   classtify?: [string, string[]][]
+  tags?: [string, string[]][]
 }
 
-const Layout: React.FC<LayoutIn> = ({ children, heroSrc, topHeight, topfixed, isPosts, classtify = [] }) => {
+const Layout: React.FC<LayoutIn> = ({ children, heroSrc, topHeight, topfixed, isPosts, classtify = [], tags }) => {
   const [isMobile, setMobile] = useState(false)
   const { width } = useSize()
   useEffect(() => {
@@ -33,7 +35,8 @@ const Layout: React.FC<LayoutIn> = ({ children, heroSrc, topHeight, topfixed, is
               <>
                 <h3>分类</h3>
                 <ClasstifyCard classtify={classtify} />
-                <div>xixi</div>
+                <h3>标签</h3>
+                <TagsCard tags={tags} />
               </>
             )}
           </div>

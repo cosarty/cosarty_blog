@@ -2,17 +2,18 @@ import type { GetStaticProps } from 'next'
 import Layout from '@/global/layout'
 import style from '@/styles/page/home.module.scss'
 import BlogInfo from '@/components/blog-info'
-import { genNotesList, getClasstifyList } from '~/lib/api'
+import { genNotesList, getClasstifyList, getTagsList } from '~/lib/api'
 
 type HomeProps = {
   posts: [string, PostInfoModel][]
   classtify: [string, string[]][]
+  tags: [string, string[]][]
 }
 
-export default function Home({ posts = [], classtify = [] }: HomeProps) {
+export default function Home({ posts = [], classtify = [], tags = [] }: HomeProps) {
   return (
     <>
-      <Layout classtify={classtify}>
+      <Layout classtify={classtify} tags={tags}>
         <div className={style['abstract-wrapper']}>
           {posts.map(([filename, meta], i) => (
             <BlogInfo key={i} postInfo={meta} src={filename} />
@@ -28,8 +29,9 @@ export default function Home({ posts = [], classtify = [] }: HomeProps) {
 export const getStaticProps: GetStaticProps = async () => {
   const posts = await genNotesList()
   const classtify = await getClasstifyList()
+  const tags = await getTagsList()
 
   return {
-    props: { posts, classtify }
+    props: { posts, classtify, tags }
   }
 }
