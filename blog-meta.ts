@@ -1,25 +1,26 @@
 import { NOTES_PATH } from '@/constants'
 import { readdirSync } from 'fs-extra'
-
+let sl: CxnBlogMeta
 
 class CxnBlogMeta {
-  private classtify: Map<string, string[]> = new Map()
+  classtify: Map<string, string[]> = new Map()
   private tags: Map<string, string[]> = new Map()
   private metaList: Map<string, PostInfoModel> = new Map()
 
   constructor() {
     this.genMetaList()
+    console.log(1)
   }
   private async genMetaList() {
     const notesList = readdirSync(NOTES_PATH)
     for (const note of notesList) {
       const noteKey = note.replace('.mdx', '')
-      const { meta } = await import(`~posts/notes/${note}`)
-
+      console.log('noteKey: ', noteKey);
+      const { meta } = await import(`~/posts/notes/${note}`)
       this.metaList.set(noteKey, meta)
     }
-    this.genTags()
-    this.genClasstify()
+    await this.genTags()
+    await this.genClasstify()
   }
 
 
@@ -28,6 +29,7 @@ class CxnBlogMeta {
       const cur = this.classtify.get(v.classtify)
       if (Array.isArray(cur)) {
         this.classtify.set(v.classtify, [...cur, k])
+
       } else {
         this.classtify.set(v.classtify, [k])
       }
@@ -48,9 +50,6 @@ class CxnBlogMeta {
     }
   }
 
-  get getClasstify() {
-    return this.classtify
-  }
   get getMetaList() {
     return this.metaList
   }
@@ -59,5 +58,5 @@ class CxnBlogMeta {
   }
 }
 
-
-export default new CxnBlogMeta()
+sl = new CxnBlogMeta()
+export default sl

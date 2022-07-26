@@ -1,5 +1,5 @@
 const Error404 = () => {
-  return <div>我是404</div>
+  return <div style={{ marginTop: '100px' }}>我是404</div>
 }
 
 export default Error404

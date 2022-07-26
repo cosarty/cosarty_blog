@@ -2,7 +2,7 @@ import type { GetStaticProps } from 'next'
 import Layout from '@/global/layout'
 import style from '@/styles/page/home.module.scss'
 import BlogInfo from '@/components/blog-info'
-import { genNotesList, getClasstifyList } from '~lib/api'
+import { genNotesList, getClasstifyList } from '~/lib/api'
 
 type HomeProps = {
   posts: [string, PostInfoModel][]

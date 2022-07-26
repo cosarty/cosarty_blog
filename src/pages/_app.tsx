@@ -1,6 +1,6 @@
 import 'antd/dist/antd.min.css'
 import '../styles/globals.scss'
-
+import { genNotesList, getClasstifyList } from '~/lib/api'
 import Head from 'next/head'
 import Script from 'next/script'
 import App from 'next/app'
@@ -23,13 +23,19 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Script src="/ribbon.js"></Script>
 
       <NavBar />
-      <Component {...pageProps} />
+      <div
+        style={{ paddingTop: '4rem', minHeight: '100vh', overflowX: 'hidden', position: 'relative', top: 0, left: 0 }}
+      >
+        <Component {...pageProps} />
+      </div>
     </>
   )
 }
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext)
-
+  await genNotesList()
+  await getClasstifyList()
+  console.log(1111)
   return { ...appProps }
 }
 

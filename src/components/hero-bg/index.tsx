@@ -4,7 +4,7 @@ import { useImge } from '@/utils/hooks'
 
 const HeroBg: FC<{ src?: string; topheight?: number; topfixed?: boolean }> = ({
   src = '',
-  topheight = 100,
+  topheight = 95,
   topfixed = true
 }) => {
   const imgSrc = useImge(src)

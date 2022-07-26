@@ -1,15 +1,10 @@
 @import '../../styles/mixin/box-show.scss';
 
 .layout-container {
-  padding-top: 3rem;
-  min-height: 100vh;
+  height: inherit;
   overflow-x: hidden;
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
+  width: inherit;
   padding-bottom: 30px;
-
   // background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
 }
 
@@ -42,6 +37,12 @@
   padding: 2rem 15px 1rem;
   align-self: flex-start;
   border-radius: 10px;
+  > h3 {
+    padding: 15px 0;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.5;
+  }
   @media screen and (max-width: 650px) {
     width: 100%;
     margin-left: 0;

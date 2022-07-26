@@ -29,7 +29,13 @@ const Layout: React.FC<LayoutIn> = ({ children, heroSrc, topHeight, topfixed, is
           <div className={style['info-wrapper']}>
             {!isMobile && <AuthorCard />}
             <hr />
-            <ClasstifyCard classtify={classtify} />
+            {!isPosts && (
+              <>
+                <h3>分类</h3>
+                <ClasstifyCard classtify={classtify} />
+                <div>xixi</div>
+              </>
+            )}
           </div>
         </div>
       </div>
