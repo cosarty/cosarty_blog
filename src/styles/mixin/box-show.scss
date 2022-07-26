@@ -6,4 +6,5 @@
     box-shadow: var(--box-hover-shadow);
     transform: translateY(-4px);
   }
+  @content;
 }
