@@ -3,7 +3,7 @@ import { FC } from 'react'
 import style from './tags-card.module.scss'
 const TagsCard: FC<{ tags?: [string, string[]][]; current?: string }> = ({ tags, current }) => {
   const router = useRouter()
-  console.log('tags: ', tags)
+
   return (
     <>
       <div className={style['tags-wrapper']}>

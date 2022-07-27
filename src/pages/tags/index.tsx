@@ -1,20 +1,20 @@
-import style from '@/styles/page/category.module.scss'
-import ClasstifyCard from '@/components/classtify-card'
-import { genNotesList, getClasstifyList } from '~/lib/api'
+import style from '@/styles/page/tags.module.scss'
+import { genNotesList, getTagsList } from '~/lib/api'
 import { FC } from 'react'
 import BlogInfo from '@/components/blog-info'
+import TagsCard from '@/components/tags-card'
 
 type CategoryProps = {
   posts: [string, PostInfoModel][]
-  classtify: [string, string[]][]
+  tags: [string, string[]][]
 }
 
-const Category: FC<CategoryProps> = ({ classtify = [], posts }) => {
+const Tags: FC<CategoryProps> = ({ tags = [], posts }) => {
   return (
     <>
-      <div className={style['category-weapper']}>
-        <div className={style['category-top']}>
-          <ClasstifyCard classtify={classtify} direction="row"></ClasstifyCard>
+      <div className={style['tags-weapper']}>
+        <div className={style['tags-top']}>
+          <TagsCard tags={tags} />
         </div>
         <div>
           {posts.map(([filename, meta], i) => (
@@ -28,11 +28,11 @@ const Category: FC<CategoryProps> = ({ classtify = [], posts }) => {
 
 export const getStaticProps = async () => {
   const posts = await genNotesList()
-  const classtify = await getClasstifyList()
+  const tags = await getTagsList()
 
   return {
-    props: { posts, classtify }
+    props: { posts, tags }
   }
 }
 
-export default Category
+export default Tags

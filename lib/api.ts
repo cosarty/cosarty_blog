@@ -64,8 +64,6 @@ export const getNoteMeta = (key: string) => metaList.get(key)
 // 获取指定分类的文章
 export const getClassNotes = async (key: string) => [...metaList].filter(([n]) => classtify.get(key)?.includes(n))
 
-export const gettagNotes = async (key: string) => [...tags].filter(([n]) => tags.get(key)?.includes(n))
-
-
+export const getTagNotes = async (key: string) => [...metaList].filter(([n]) => tags.get(key)?.includes(n))
 
 

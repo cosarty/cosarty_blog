@@ -1,22 +1,22 @@
-import style from '@/styles/page/category.module.scss'
-import ClasstifyCard from '@/components/classtify-card'
-import { checkClasskey, getClassKey, getClassNotes, getClasstifyList } from '~/lib/api'
+import style from '@/styles/page/tags.module.scss'
+import { checkTag, getClassNotes, getTagNotes, getTagsKey, getTagsList } from '~/lib/api'
 import { FC } from 'react'
 import BlogInfo from '@/components/blog-info'
 import { useRouter } from 'next/router'
+import TagsCard from '@/components/tags-card'
 
-type ClasstifyProps = {
+type TagProps = {
   posts: [string, PostInfoModel][]
-  classtify: [string, string[]][]
+  tags: [string, string[]][]
 }
 
-const Classtify: FC<ClasstifyProps> = ({ classtify = [], posts }) => {
+const Tag: FC<TagProps> = ({ tags = [], posts }) => {
   const { query } = useRouter()
   return (
     <>
-      <div className={style['category-weapper']}>
-        <div className={style['category-top']}>
-          <ClasstifyCard classtify={classtify} direction="row" current={query.classtify as string}></ClasstifyCard>
+      <div className={style['tags-weapper']}>
+        <div className={style['tags-top']}>
+          <TagsCard tags={tags} current={query.tag as string} />
         </div>
         <div>
           {posts.map(([filename, meta], i) => (
@@ -29,8 +29,8 @@ const Classtify: FC<ClasstifyProps> = ({ classtify = [], posts }) => {
 }
 
 export const getStaticPaths = async () => {
-  await getClasstifyList()
-  const paths = (await getClassKey()).map((key: string) => ({ params: { tag: key } }))
+  await getTagsList()
+  const paths = (await getTagsKey()).map((key: string) => ({ params: { tag: key } }))
 
   return {
     paths,
@@ -38,11 +38,12 @@ export const getStaticPaths = async () => {
   }
 }
 export const getStaticProps = async ({ params }: any) => {
-  const classtify = await getClasstifyList()
-  if (!(await checkClasskey(params.classtify))) return { notFound: true }
+  const tags = await getTagsList()
+  if (!(await checkTag(params.tag))) return { notFound: true }
+  console.log('await getTagNotes(params.tag): ', await getTagNotes(params.tag))
   return {
-    props: { posts: await getClassNotes(params.classtify), classtify }
+    props: { posts: await getTagNotes(params.tag), tags }
   }
 }
 
-export default Classtify
+export default Tag
