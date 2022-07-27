@@ -40,7 +40,6 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }: any) => {
   const tags = await getTagsList()
   if (!(await checkTag(params.tag))) return { notFound: true }
-  console.log('await getTagNotes(params.tag): ', await getTagNotes(params.tag))
   return {
     props: { posts: await getTagNotes(params.tag), tags }
   }

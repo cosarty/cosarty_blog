@@ -2,36 +2,36 @@ const MENU_CONFIG = {
   classify: {
     name: '分类',
     icon: 'weixin',
-    href: '',
+    href: '/category',
     sub: []
   },
   archive: {
     name: '归档',
     icon: 'qq',
-    href: '',
+    href: '/',
     sub: []
   },
   blogroll: {
     name: '友链',
     icon: 'weixin',
-    href: '',
+    href: '/',
     sub: []
   },
   about: {
     name: '关于',
     icon: 'weixin',
-    href: '',
+    href: '/',
     sub: []
   },
   collect: {
     name: '很棒的内容',
     icon: 'weixin',
-    href: '',
+    href: '/',
     sub: [
       {
         name: 'vue3',
         icon: false,
-        href: '',
+        href: '/',
       }
     ]
   }

@@ -74,28 +74,29 @@ const Links: FC<NvaLinkProps> = ({ conf, show }) => {
     <div className={`${style['navbar-link-items']} ${show ? style['show-sidebar'] : ''}`}>
       {isMobile && <AuthorCard />}
       {getKey(conf).map((key) => {
-        const { name, icon, sub } = conf[key]
+        const { name, icon, sub, href } = conf[key]
         return (
-          <div
-            key={key}
-            className={style['navbar-link-item']}
-            onMouseEnter={() => showSubMenu(key, 'block')}
-            onMouseLeave={() => showSubMenu(key, 'none')}
-            onClick={() => {
-              openMenu(key)
-            }}
-          >
-            <SvgGo icon={icon} style={{ width: '1.3rem', height: '1.3rem' }} />
-            <span>{name}</span>
-            {isSub(sub) && (
-              <SvgGo
-                icon="arrow-down-filling"
-                className={`${style['arrow']} ${checkActive(key, 'down-arrow')}`}
-                style={{ width: '0.9rem', height: '0.9rem' }}
-              />
-            )}
-            {isSub(sub) && NavSub(sub, key)}
-          </div>
+          <Link href={href} key={key}>
+            <div
+              className={style['navbar-link-item']}
+              onMouseEnter={() => showSubMenu(key, 'block')}
+              onMouseLeave={() => showSubMenu(key, 'none')}
+              onClick={() => {
+                openMenu(key)
+              }}
+            >
+              <SvgGo icon={icon} style={{ width: '1.3rem', height: '1.3rem' }} />
+              <span>{name}</span>
+              {isSub(sub) && (
+                <SvgGo
+                  icon="arrow-down-filling"
+                  className={`${style['arrow']} ${checkActive(key, 'down-arrow')}`}
+                  style={{ width: '0.9rem', height: '0.9rem' }}
+                />
+              )}
+              {isSub(sub) && NavSub(sub, key)}
+            </div>
+          </Link>
         )
       })}
     </div>
