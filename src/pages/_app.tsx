@@ -3,8 +3,8 @@ import Head from 'next/head'
 import Script from 'next/script'
 import App from 'next/app'
 import NavBar from '@/global/nav-bar'
+import Provider from '@/global/provider'
 import { AppContext } from 'next/app'
-
 import { type AppProps } from 'next/app'
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -19,13 +19,23 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <Script src="/iconfont.js"></Script>
       <Script src="/ribbon.js"></Script>
-
-      <NavBar />
-      <div
-        style={{ paddingTop: '4rem', minHeight: '100vh', overflowX: 'hidden', position: 'relative', top: 0, left: 0 }}
-      >
-        <Component {...pageProps} />
-      </div>
+      <Provider>
+        <>
+          <NavBar />
+          <div
+            style={{
+              paddingTop: '4rem',
+              minHeight: '100vh',
+              overflowX: 'hidden',
+              position: 'relative',
+              top: 0,
+              left: 0
+            }}
+          >
+            <Component {...pageProps} />
+          </div>
+        </>
+      </Provider>
     </>
   )
 }

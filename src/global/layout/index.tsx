@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import HeroBg from '@/components/hero-bg'
 import style from './layout.module.scss'
 import AuthorCard from '@/components/author-card'
-import { useSize } from '@/utils/hooks'
 import ClasstifyCard from '@/components/classtify-card'
 import TagsCard from '@/components/tags-card'
+import { useGlobalState } from '../provider'
 
 interface LayoutIn {
   children: React.ReactElement
@@ -17,11 +17,7 @@ interface LayoutIn {
 }
 
 const Layout: React.FC<LayoutIn> = ({ children, heroSrc, topHeight, topfixed, isPosts, classtify = [], tags }) => {
-  const [isMobile, setMobile] = useState(false)
-  const { width } = useSize()
-  useEffect(() => {
-    setMobile(width < 650)
-  }, [width])
+  const { isMobile } = useGlobalState()
   return (
     <>
       <HeroBg src={heroSrc} topheight={topHeight} topfixed={topfixed} />

@@ -1,11 +1,6 @@
+@import '../mixin/global-mixin.scss';
 .tags-weapper {
-  width: 60%;
-  height: inherit;
-  margin: 0 auto;
-  margin-top: 20px;
-  @media screen and (max-width: 650px) {
-    width: 85vw;
-  }
+  @include global-wrapper;
 
   > .tags-top {
     height: auto;

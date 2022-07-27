@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "/",
+    "outDir": "./typess",
     "jsx": "preserve",
     "target": "ES2015",
     "module": "esnext",
@@ -34,7 +34,7 @@
   },
   // "include": ["components", "../../shims/*"],
   "exclude": [
-    "node_modules"
+    "./node_modules"
   ],
   "include": [
     "next-env.d.ts",

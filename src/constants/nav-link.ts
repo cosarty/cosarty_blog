@@ -8,7 +8,7 @@ const MENU_CONFIG = {
   archive: {
     name: '归档',
     icon: 'qq',
-    href: '/',
+    href: '/archives',
     sub: []
   },
   blogroll: {

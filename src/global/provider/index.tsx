@@ -18,14 +18,19 @@ const Provider: FC<{ children: ReactElement }> = ({ children }) => {
   const { width } = useSize()
   const GlobalState = createGloblState()
 
-  const [global, setGlobal] = useState<StateOption>({ isMobile: false })
+  useEffect(() => {
+    ;(async () => {})()
+  })
+
+  const [global, setGlobal] = useState<StateOption>({ isMobile: true })
 
   useEffect(() => {
-    setGlobal((pre) => {
-      if (width < 650 && !pre.isMobile) pre.isMobile = true
-      if (width > 650 && pre.isMobile) pre.isMobile = false
-      return pre
-    })
+    if (width < 650 && !global.isMobile) {
+      setGlobal({ ...global, isMobile: true })
+    }
+    if (width > 650 && global.isMobile) {
+      setGlobal({ ...global, isMobile: false })
+    }
   }, [width])
   return <GlobalState value={global}>{children}</GlobalState>
 }

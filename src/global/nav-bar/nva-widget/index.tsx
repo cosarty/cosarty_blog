@@ -9,6 +9,7 @@ import { MenuItemType } from '@/constants/nav-link'
 import { useSize } from '@/utils/hooks'
 import AuthorCard from '@/components/author-card'
 import Link from 'next/link'
+import { useGlobalState } from '@/global/provider'
 
 const Logo = () => {
   return (
@@ -24,13 +25,9 @@ const Logo = () => {
 }
 
 const Links: FC<NvaLinkProps> = ({ conf, show }) => {
-  const [isMobile, setMobile] = useState(false)
-  const { width } = useSize()
+  const { isMobile } = useGlobalState()
   const [activeKey, setActiveKey] = useState<string[]>([])
   const isSub = (sub: MenuItemType[]) => len(sub) !== 0
-  useEffect(() => {
-    setMobile(width < 650)
-  }, [width])
 
   // render subMenu
   const NavSub = (sub: MenuItemType[], key: string) => {
@@ -71,7 +68,10 @@ const Links: FC<NvaLinkProps> = ({ conf, show }) => {
   const checkActive = (key: string, checkClass: string) => (activeKey.includes(key) && style[checkClass]) || ''
 
   return (
-    <div className={`${style['navbar-link-items']} ${show ? style['show-sidebar'] : ''}`}>
+    <div
+      className={`${style['navbar-link-items']} ${show ? style['show-sidebar'] : ''}
+    `}
+    >
       {isMobile && <AuthorCard />}
       {getKey(conf).map((key) => {
         const { name, icon, sub, href } = conf[key]

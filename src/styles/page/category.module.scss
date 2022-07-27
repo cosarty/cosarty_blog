@@ -1,12 +1,7 @@
-.category-weapper {
-  width: 60%;
-  height: inherit;
-  margin: 0 auto;
-  margin-top: 20px;
-  @media screen and (max-width: 650px) {
-    width: 85vw;
-  }
+@import '../mixin/global-mixin.scss';
 
+.category-weapper {
+  @include global-wrapper;
   > .category-top {
     height: auto;
     margin-bottom: 20px;

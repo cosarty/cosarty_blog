@@ -1,69 +1,72 @@
 import { readdirSync } from 'fs'
 import { NOTES_PATH } from '@/constants'
+import { len } from '@/utils'
 
 
-let metaList: Map<string, PostInfoModel> = new Map()
-let classtify: Map<string, string[]> = new Map()
-let tags: Map<string, string[]> = new Map()
+let metaList: Record<string, PostInfoModel> = {}
+let classtify: Record<string, string[]> = {}
+let tags: Record<string, string[]> = {}
 
+const notesSort = (notes: typeof metaList) => Object.entries(notes).sort((a, b) => new Date(b[1].date).getTime() - new Date(a[1].date).getTime())
 
 export const genNotesList = async () => {
   const notesList = readdirSync(NOTES_PATH)
   for (const note of notesList) {
     const noteKey = note.replace('.mdx', '')
     const { meta } = await import(`~/posts/notes/${note}`)
-    metaList.set(noteKey, meta)
+    metaList[noteKey] = meta
   }
-  return [...metaList]
+
+  return notesSort(metaList)
 }
 
 export const getClasstifyList = async () => {
 
-  if (classtify.size) return [...classtify]
+  if (len(classtify)) return Object.entries(classtify)
 
-  if (!metaList.size) { await genNotesList() }
-  for (const [k, v] of metaList) {
-    const cur = classtify.get(v.classtify)
+  if (!len(metaList)) { await genNotesList() }
+  for (const [k, v] of Object.entries(metaList)) {
+    const cur = classtify[v.classtify]
     if (Array.isArray(cur)) {
-      classtify.set(v.classtify, [...cur, k])
+      classtify[v.classtify] = [...cur, k]
 
     } else {
-      classtify.set(v.classtify, [k])
+      classtify[v.classtify] = [k]
     }
   }
 
-  return [...classtify];
+  return Object.entries(classtify);
 }
 
 export const getTagsList = async () => {
-  if (tags.size) return [...tags]
-  if (!metaList.size) { await genNotesList() }
-  for (const [k, v] of metaList) {
+  if (len(tags)) return Object.entries(tags)
+  if (!len(metaList)) { await genNotesList() }
+  for (const [k, v] of Object.entries(metaList)) {
     for (const key of v.tag!) {
-      const cur = tags.get(key)
+      const cur = tags[key]
       if (Array.isArray(cur)) {
-        tags.set(key, [...cur, k])
+        tags[key] = [...cur, k]
       } else {
-        tags.set(key, [k])
+        tags[key] = [k]
       }
     }
 
   }
-  return [...tags];
+  return Object.entries(tags);
 }
 
-export const getClassKey = async () => [...classtify.keys()]
-export const getTagsKey = async () => [...tags.keys()]
-export const getNotesKey = async () => [...metaList.keys()]
+export const getClassKey = async () => [...Object.keys(classtify)]
+export const getTagsKey = async () => [...Object.keys(tags)]
+export const getNotesKey = async () => [...Object.keys(metaList)]
 export const checkNotesKey = async (key: string) => (await getNotesKey()).includes(key)
 export const checkClasskey = async (key: string) => (await getClassKey()).includes(key)
 export const checkTag = async (key: string) => (await getTagsKey()).includes(key)
 
-export const getNoteMeta = (key: string) => metaList.get(key)
+export const getNoteMeta = (key: string) => metaList[key]
 
 // 获取指定分类的文章
-export const getClassNotes = async (key: string) => [...metaList].filter(([n]) => classtify.get(key)?.includes(n))
+export const getClassNotes = async (key: string) => notesSort(metaList).filter(([n]) => classtify[key]?.includes(n))
 
-export const getTagNotes = async (key: string) => [...metaList].filter(([n]) => tags.get(key)?.includes(n))
+export const getTagNotes = async (key: string) => notesSort(metaList).filter(([n]) => tags[key]?.includes(n))
 
 
