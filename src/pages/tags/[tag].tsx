@@ -30,7 +30,7 @@ const Classtify: FC<ClasstifyProps> = ({ classtify = [], posts }) => {
 
 export const getStaticPaths = async () => {
   await getClasstifyList()
-  const paths = (await getClassKey()).map((key: string) => ({ params: { classtify: key } }))
+  const paths = (await getClassKey()).map((key: string) => ({ params: { tag: key } }))
 
   return {
     paths,
