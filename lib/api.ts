@@ -1,6 +1,7 @@
 import { readdirSync } from 'fs'
 import { NOTES_PATH } from '@/constants'
 import { len } from '@/utils'
+import { extname } from 'path'
 
 
 let metaList: Record<string, PostInfoModel> = {}
@@ -12,6 +13,8 @@ const notesSort = (notes: typeof metaList) => Object.entries(notes).sort((a, b) 
 export const genNotesList = async () => {
   const notesList = readdirSync(NOTES_PATH)
   for (const note of notesList) {
+    if (extname(note) !== '.mdx') continue
+
     const noteKey = note.replace('.mdx', '')
     const { meta } = await import(`~/posts/notes/${note}`)
     metaList[noteKey] = meta
