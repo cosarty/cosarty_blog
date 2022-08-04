@@ -36,6 +36,66 @@
         top: 3rem;
       }
     }
+
+    &.notes-sort {
+      > div {
+        margin: 0 0 20px 10px;
+        &::before {
+          position: absolute;
+          content: '';
+          border: 5px solid #49b1f5;
+          border-radius: 50%;
+          background-color: var(--card-box-bg);
+        }
+        &.notes-sort-item-title {
+          font-size: 23px;
+          &::before {
+            width: 7px;
+            height: 7px;
+            left: 1.7rem;
+            transform: translateY(7px);
+            border-color: orange;
+          }
+        }
+        &.notes-sort-item {
+          display: flex;
+          align-items: center;
+          &:hover {
+            &::before {
+              border-color: orange;
+            }
+            cursor: pointer;
+          }
+          &::before {
+            width: 5px;
+            height: 5px;
+            left: 1.8rem;
+            transform: translateY(2px);
+          }
+          > img {
+            width: 80px;
+            height: 80px;
+            border-radius: 4px;
+            margin-right: 10px;
+          }
+          > .notes-sort-item-meta {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            > div {
+              margin-bottom: 10px;
+              > svg {
+                vertical-align: bottom;
+                margin-right: 6px;
+              }
+            }
+            > div:last-of-type {
+              font-size: 19px;
+            }
+          }
+        }
+      }
+    }
   }
   // border-left: 2px solid #aadafa;
 }

@@ -1,8 +1,12 @@
+import { Fragment } from 'react'
 import type { GetStaticProps } from 'next'
 import Layout from '@/global/layout'
 import style from '@/styles/page/archives.module.scss'
 import { genNotesList, getClasstifyList, getTagsList } from '~/lib/api'
 import { len, parseDate } from '@/utils'
+import Link from 'next/link'
+import { useImge } from '@/utils/hooks'
+import SvgGo from '@/components/svg-go'
 type HomeProps = {
   posts: [string, PostInfoModel][]
   classtify: [string, string[]][]
@@ -18,8 +22,35 @@ const Archives = ({ posts = [], classtify = [], tags = [] }: HomeProps) => {
             <h2>文章总览-{len(posts)}</h2>
           </div>
           <div className={style['notes-sort']}>
-            <div className={style['notes-sort-item-title']}></div>
-            <div className={style['notes-sort-item']}>1</div>
+            {posts.map(([filename, meta], i, p) => {
+              const showSubDate = () => {
+                // 如果后面设置了分页的话 就直接  i/分页数
+                if (!p[i - 1]) {
+                  return true
+                }
+                if (parseDate(p[i][0]).year !== parseDate(p[i - 1][0]).year) {
+                  return true
+                }
+                return false
+              }
+              return (
+                <Fragment key={filename}>
+                  {showSubDate() && <div className={style['notes-sort-item-title']}>{parseDate(filename).year}</div>}
+                  <Link href={{ pathname: '/blog/[slug]', query: { slug: filename } }}>
+                    <div className={style['notes-sort-item']}>
+                      <img src={useImge(`blog/${meta.previewImg}`)} />
+                      <div className={style['notes-sort-item-meta']}>
+                        <div>
+                          <SvgGo icon="rili" style={{ width: '1.3rem', height: '1.3rem' }} />
+                          {meta.date}
+                        </div>
+                        <div>{meta.title}</div>
+                      </div>
+                    </div>
+                  </Link>
+                </Fragment>
+              )
+            })}
           </div>
         </div>
         {/* 这个留给分页组件 */}
