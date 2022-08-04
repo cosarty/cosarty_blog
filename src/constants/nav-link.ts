@@ -1,32 +1,32 @@
 const MENU_CONFIG = {
   classify: {
     name: '分类',
-    icon: 'weixin',
+    icon: 'fenlei',
     href: '/category',
     sub: []
   },
   archive: {
     name: '归档',
-    icon: 'qq',
+    icon: 'qianyueguidang',
     href: '/archives',
     sub: []
   },
   blogroll: {
     name: '友链',
-    icon: 'weixin',
+    icon: 'youhuiquan-',
     href: '/',
     sub: []
   },
   about: {
     name: '关于',
-    icon: 'weixin',
+    icon: 'guanyuwomen',
     href: '/',
     sub: []
   },
   collect: {
     name: '很棒的内容',
-    icon: 'weixin',
-    href: '/',
+    icon: 'wenzhang',
+    href: '',
     sub: [
       {
         name: 'vue3',

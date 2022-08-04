@@ -35,8 +35,10 @@ const Links: FC<NvaLinkProps> = ({ conf, show }) => {
       <>
         <div className={`${style['submenu']} ${checkActive(key, 'openMenu')}`} id={key}>
           <ul>
-            {sub.map((m) => (
-              <li key={m.name}>{m.name}</li>
+            {sub.map((m, i) => (
+              <Link href={m.href} key={i}>
+                <li key={m.name}>{m.name}</li>
+              </Link>
             ))}
           </ul>
         </div>
@@ -75,28 +77,35 @@ const Links: FC<NvaLinkProps> = ({ conf, show }) => {
       {isMobile && <AuthorCard />}
       {getKey(conf).map((key) => {
         const { name, icon, sub, href } = conf[key]
-        return (
+
+        const el = (
+          <div
+            className={style['navbar-link-item']}
+            onMouseEnter={() => showSubMenu(key, 'block')}
+            onMouseLeave={() => showSubMenu(key, 'none')}
+            onClick={() => {
+              openMenu(key)
+            }}
+          >
+            <SvgGo icon={icon} style={{ width: '1.3rem', height: '1.3rem' }} />
+            <span>{name}</span>
+            {isSub(sub) && (
+              <SvgGo
+                icon="arrow-down-filling"
+                className={`${style['arrow']} ${checkActive(key, 'down-arrow')}`}
+                style={{ width: '0.9rem', height: '0.9rem' }}
+              />
+            )}
+            {isSub(sub) && NavSub(sub, key)}
+          </div>
+        )
+
+        return !isSub(sub) ? (
           <Link href={href} key={key}>
-            <div
-              className={style['navbar-link-item']}
-              onMouseEnter={() => showSubMenu(key, 'block')}
-              onMouseLeave={() => showSubMenu(key, 'none')}
-              onClick={() => {
-                openMenu(key)
-              }}
-            >
-              <SvgGo icon={icon} style={{ width: '1.3rem', height: '1.3rem' }} />
-              <span>{name}</span>
-              {isSub(sub) && (
-                <SvgGo
-                  icon="arrow-down-filling"
-                  className={`${style['arrow']} ${checkActive(key, 'down-arrow')}`}
-                  style={{ width: '0.9rem', height: '0.9rem' }}
-                />
-              )}
-              {isSub(sub) && NavSub(sub, key)}
-            </div>
+            {el}
           </Link>
+        ) : (
+          el
         )
       })}
     </div>

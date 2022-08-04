@@ -25,8 +25,12 @@ const Layout: React.FC<LayoutIn> = ({ children, heroSrc, topHeight, topfixed, is
         <div className={style['home-blog-wrapper']}>
           <div className={style['blog-list']}>{children}</div>
           <div className={style['info-wrapper']}>
-            {!isMobile && <AuthorCard />}
-            <hr />
+            {isMobile !== null && !isMobile && (
+              <>
+                <AuthorCard /> <hr />
+              </>
+            )}
+
             {!isPosts && (
               <>
                 <h3>分类</h3>

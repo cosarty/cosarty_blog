@@ -36,7 +36,7 @@ const AuthorCard = () => {
             <SvgGo icon="weixin" />
           </li>
           <li className={style['social-item']}>
-            <SvgGo icon="github" />
+            <SvgGo icon="github2" />
           </li>
           <li className={style['social-item']}>
             <SvgGo icon="mail" />
