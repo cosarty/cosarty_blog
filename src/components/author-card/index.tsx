@@ -4,8 +4,9 @@ import Image from 'next/image'
 import SvgGo from '../svg-go'
 import Link from 'next/link'
 import { useGlobalState } from '@/global/provider'
+import { FC } from 'react'
 
-const AuthorCard = () => {
+const AuthorCard: FC<{ count: { notes_count: number; classtify_count: number; tag_count: number } }> = ({ count }) => {
   const { github, author, motto } = useGlobalState()
   return (
     <div className={style['author-card']}>
@@ -25,15 +26,15 @@ const AuthorCard = () => {
 
         <div className={style['num']}>
           <div>
-            <h3>142</h3>
+            <h3>{count?.notes_count}</h3>
             <h6>文章</h6>
           </div>
           <div>
-            <h3>10</h3>
+            <h3>{count?.classtify_count}</h3>
             <h6>分类</h6>
           </div>
           <div>
-            <h3>98</h3>
+            <h3>{count?.tag_count}</h3>
             <h6>标签</h6>
           </div>
         </div>

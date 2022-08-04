@@ -14,9 +14,14 @@ type HomeProps = {
 }
 
 const Archives = ({ posts = [], classtify = [], tags = [] }: HomeProps) => {
+  const count = {
+    notes_count: len(posts),
+    classtify_count: len(classtify),
+    tag_count: len(tags)
+  }
   return (
     <>
-      <Layout classtify={classtify} tags={tags}>
+      <Layout classtify={classtify} tags={tags} count={count}>
         <div className={style['archives-wrapper']}>
           <div className={style['notes-sort-title']}>
             <h2>文章总览-{len(posts)}</h2>

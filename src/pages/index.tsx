@@ -3,6 +3,7 @@ import Layout from '@/global/layout'
 import style from '@/styles/page/home.module.scss'
 import BlogInfo from '@/components/blog-info'
 import { genNotesList, getClasstifyList, getTagsList } from '~/lib/api'
+import { len } from '@/utils'
 
 type HomeProps = {
   posts: [string, PostInfoModel][]
@@ -11,9 +12,14 @@ type HomeProps = {
 }
 
 export default function Home({ posts = [], classtify = [], tags = [] }: HomeProps) {
+  const count = {
+    notes_count: len(posts),
+    classtify_count: len(classtify),
+    tag_count: len(tags)
+  }
   return (
     <>
-      <Layout classtify={classtify} tags={tags}>
+      <Layout classtify={classtify} tags={tags} count={count}>
         <div className={style['abstract-wrapper']}>
           {posts.map(([filename, meta], i) => (
             <BlogInfo key={i} postInfo={meta} src={filename} />

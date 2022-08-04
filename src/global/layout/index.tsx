@@ -15,6 +15,7 @@ interface LayoutIn {
   classtify?: [string, string[]][]
   tags?: [string, string[]][]
   showContent?: boolean
+  count: { notes_count: number; classtify_count: number; tag_count: number }
 }
 
 const Layout: React.FC<LayoutIn> = ({
@@ -25,7 +26,8 @@ const Layout: React.FC<LayoutIn> = ({
   isPosts,
   classtify = [],
   tags,
-  showContent
+  showContent,
+  count
 }) => {
   const { isMobile } = useGlobalState()
   return (
@@ -37,7 +39,8 @@ const Layout: React.FC<LayoutIn> = ({
           <div className={style['info-wrapper']}>
             {isMobile !== null && !isMobile && (
               <>
-                <AuthorCard /> <hr />
+                {/*  tslint:disable-next-line: no-non-null-assertion */}
+                <AuthorCard count={count} /> <hr />
               </>
             )}
 
