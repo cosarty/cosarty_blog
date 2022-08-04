@@ -1,11 +1,15 @@
-export default {
+const config = {
   "author": "cosarty",
-  "avtar": "/",
+  "avtar": "",
   "email": "1398675906@qq.com",
-  "github": "",
+  "github": "https://github.com/cosarty",
   "domain": "",
-  "siteName": '笨蛋'
+  "siteName": '小蔡不菜',
+  "motto": "荷尔蒙决定一见钟情，多巴胺决定天长地久"
 }
+
+
+export default config
 // author: 'Kanno',
 //   title: 'Kanno.blog',
 //   avatar: 'https://avatars.githubusercontent.com/u/52351095?s=100&v=4',

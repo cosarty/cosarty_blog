@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="description" content="先测试测试" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Script src="//at.alicdn.com/t/c/font_3533437_hsbin8tdzlj.js" defer></Script>
+      <Script src="//at.alicdn.com/t/c/font_3533437_7ht7dnhjndw.js" defer></Script>
       <Script src="/ribbon.js" defer></Script>
       <Provider>
         <>

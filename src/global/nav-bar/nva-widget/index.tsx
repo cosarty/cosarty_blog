@@ -80,6 +80,7 @@ const Links: FC<NvaLinkProps> = ({ conf, show }) => {
 
         const el = (
           <div
+            key={key}
             className={style['navbar-link-item']}
             onMouseEnter={() => showSubMenu(key, 'block')}
             onMouseLeave={() => showSubMenu(key, 'none')}

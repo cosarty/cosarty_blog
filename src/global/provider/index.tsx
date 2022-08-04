@@ -1,13 +1,17 @@
 import { Context, createContext, FC, ReactElement, useContext, useState, useEffect } from 'react'
 import { useSize } from '@/utils/hooks'
-export interface StateOption {
+import blog_config from '~/blog.conf'
+
+export type BlogMeta = typeof blog_config
+
+export type StateOption = {
   isMobile?: boolean | null
-}
+} & BlogMeta
 
 let globalState: Context<StateOption>
 
 const createGloblState = () => {
-  globalState = createContext<StateOption>({ isMobile: null })
+  globalState = createContext<StateOption>({ isMobile: null, ...blog_config })
 
   return globalState.Provider
 }
@@ -18,7 +22,7 @@ const Provider: FC<{ children: ReactElement }> = ({ children }) => {
   const { width } = useSize()
   const GlobalState = createGloblState()
 
-  const [global, setGlobal] = useState<StateOption>({ isMobile: null })
+  const [global, setGlobal] = useState<StateOption>({ isMobile: null, ...blog_config })
 
   useEffect(() => {
     if (width < 650 && !global.isMobile) {

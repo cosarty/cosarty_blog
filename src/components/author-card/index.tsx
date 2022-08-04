@@ -2,21 +2,27 @@ import style from './author-card.module.scss'
 import Avartar from '@/assets/caos_avatar.jpg'
 import Image from 'next/image'
 import SvgGo from '../svg-go'
+import Link from 'next/link'
+import { useGlobalState } from '@/global/provider'
 
 const AuthorCard = () => {
+  const { github, author, motto } = useGlobalState()
   return (
     <div className={style['author-card']}>
       <div className={style['personal-info-wrapper']}>
         <Image src={Avartar} width={100} height={100} alt="头像" />
-        <h3 className={style['name']}>蔡夏柠</h3>
-        <p className={style['desc']}>hhhhhhhh</p>
-        <button>
-          <SvgGo
-            icon="github"
-            style={{ width: '1.4rem', height: '1.4rem', verticalAlign: 'bottom', marginRight: '5px' }}
-          />
-          Follow Me
-        </button>
+        <h3 className={style['name']}>{author}</h3>
+        <p className={style['desc']}>{motto}</p>
+        <Link href={github}>
+          <button>
+            <SvgGo
+              icon="github"
+              style={{ width: '1.4rem', height: '1.4rem', verticalAlign: 'bottom', marginRight: '5px' }}
+            />
+            Follow Me
+          </button>
+        </Link>
+
         <div className={style['num']}>
           <div>
             <h3>142</h3>
