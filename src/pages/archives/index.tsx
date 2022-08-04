@@ -1,9 +1,8 @@
 import type { GetStaticProps } from 'next'
 import Layout from '@/global/layout'
-import style from '@/styles/page/home.module.scss'
-import BlogInfo from '@/components/blog-info'
+import style from '@/styles/page/archives.module.scss'
 import { genNotesList, getClasstifyList, getTagsList } from '~/lib/api'
-
+import { len, parseDate } from '@/utils'
 type HomeProps = {
   posts: [string, PostInfoModel][]
   classtify: [string, string[]][]
@@ -14,7 +13,15 @@ const Archives = ({ posts = [], classtify = [], tags = [] }: HomeProps) => {
   return (
     <>
       <Layout classtify={classtify} tags={tags}>
-        <div>我是归档</div>
+        <div className={style['archives-wrapper']}>
+          <div className={style['notes-sort-title']}>
+            <h2>文章总览-{len(posts)}</h2>
+          </div>
+          <div className={style['notes-sort']}>
+            <div className={style['notes-sort-item-title']}></div>
+            <div className={style['notes-sort-item']}>1</div>
+          </div>
+        </div>
         {/* 这个留给分页组件 */}
         {/* <div className='pagation pagation'></div> */}
       </Layout>
