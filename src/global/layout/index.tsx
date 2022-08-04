@@ -14,13 +14,23 @@ interface LayoutIn {
   isPosts?: boolean
   classtify?: [string, string[]][]
   tags?: [string, string[]][]
+  showContent?: boolean
 }
 
-const Layout: React.FC<LayoutIn> = ({ children, heroSrc, topHeight, topfixed, isPosts, classtify = [], tags }) => {
+const Layout: React.FC<LayoutIn> = ({
+  children,
+  heroSrc,
+  topHeight,
+  topfixed,
+  isPosts,
+  classtify = [],
+  tags,
+  showContent
+}) => {
   const { isMobile } = useGlobalState()
   return (
     <>
-      <HeroBg src={heroSrc} topheight={topHeight} topfixed={topfixed} />
+      <HeroBg src={heroSrc} topheight={topHeight} topfixed={topfixed} showContent={showContent} />
       <div className={style['layout-container']}>
         <div className={style['home-blog-wrapper']}>
           <div className={style['blog-list']}>{children}</div>

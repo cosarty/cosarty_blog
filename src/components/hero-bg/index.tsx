@@ -1,13 +1,15 @@
 import style from './hero-bg.module.scss'
 import { FC } from 'react'
 import { useImge } from '@/utils/hooks'
-
-const HeroBg: FC<{ src?: string; topheight?: number; topfixed?: boolean }> = ({
+import { useGlobalState } from '@/global/provider'
+const HeroBg: FC<{ src?: string; topheight?: number; topfixed?: boolean; showContent?: boolean }> = ({
   src = '',
   topheight = 95,
-  topfixed = true
+  topfixed = true,
+  showContent = true
 }) => {
   const imgSrc = useImge(src)
+  const { descript, label } = useGlobalState()
 
   return (
     <div
@@ -18,10 +20,12 @@ const HeroBg: FC<{ src?: string; topheight?: number; topfixed?: boolean }> = ({
         backgroundAttachment: `${topfixed ? 'fixed' : 'scroll'}`
       }}
     >
-      <div className={style['motto']}>
-        <h1>一个正在学走路的小萌新</h1>
-        <p>遇见都是天意,拥有都是幸运,世界上的一千种等待,最好的叫做未来可期....</p>
-      </div>
+      {showContent && (
+        <div className={style['motto']}>
+          <h1>{label}</h1>
+          <p>{descript}</p>
+        </div>
+      )}
     </div>
   )
 }

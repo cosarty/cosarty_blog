@@ -19,16 +19,16 @@ const BlogInfo: FC<{ postInfo: PostInfoModel; src: string }> = ({ postInfo, src 
           <h2>{title}</h2>
           <div className={style['post-meta']}>
             <span>
+              <SvgGo icon="gerenzhongxin" style={{ width: '1.3rem', height: '1.3rem' }} />
+              {author}
+            </span>
+            <span>
               <SvgGo icon="rili" style={{ width: '1.3rem', height: '1.3rem' }} />
               {date}
             </span>
             <span>
               <SvgGo icon="biaoqian1" style={{ width: '1.3rem', height: '1.3rem' }} />
               {tag?.join(',')}
-            </span>
-            <span>
-              <SvgGo icon="gerenzhongxin" style={{ width: '1.3rem', height: '1.3rem' }} />
-              {author}
             </span>
           </div>
           <p>{description}</p>

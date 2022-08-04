@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import Image from 'next/image'
 import Avartar from '@/assets/caos_avatar.jpg'
 import style from './nav-widget.module.scss'
@@ -6,18 +6,18 @@ import SvgGo from '@/components/svg-go'
 import { getKey, len } from '@/utils'
 import { NvaLinkProps } from './interface'
 import { MenuItemType } from '@/constants/nav-link'
-import { useSize } from '@/utils/hooks'
 import AuthorCard from '@/components/author-card'
 import Link from 'next/link'
 import { useGlobalState } from '@/global/provider'
 
 const Logo = () => {
+  const { siteName } = useGlobalState()
   return (
     <>
       <Link href="/">
         <div className={style['logo']}>
           <Image src={Avartar} width={40} height={40}></Image>
-          <h2>cos</h2>
+          <h2>{siteName}</h2>
         </div>
       </Link>
     </>
