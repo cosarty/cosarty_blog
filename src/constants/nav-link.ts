@@ -14,13 +14,13 @@ const MENU_CONFIG = {
   blogroll: {
     name: '友链',
     icon: 'youhuiquan-',
-    href: '/',
+    href: '/friends',
     sub: []
   },
   about: {
     name: '关于',
     icon: 'guanyuwomen',
-    href: '/',
+    href: '/about',
     sub: []
   },
   collect: {

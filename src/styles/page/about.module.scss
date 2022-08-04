@@ -1,0 +1,11 @@
+@import '../mixin/global-mixin.scss';
+
+.about-wrapper {
+  min-height: 100vh;
+  flex: auto;
+  background-color: white;
+  @include box-show;
+  border-radius: 15px;
+  padding: 20px 15px;
+  margin-bottom: 20px;
+}
