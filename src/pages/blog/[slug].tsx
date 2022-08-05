@@ -12,11 +12,8 @@ import { len } from '@/utils'
 
 const DynamicComponent = (key: string) => dynamic(() => import(`~/posts/notes/${key}.mdx`))
 
-interface BlogPostProps {
+type BlogPostProps = MetaInfoType & {
   meta: PostInfoModel
-  posts: [string, PostInfoModel][]
-  classtify: [string, string[]][]
-  tags: [string, string[]][]
   changeCount: (state: noteNumType) => void
 }
 

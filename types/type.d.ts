@@ -11,3 +11,10 @@ declare type PostInfoModel = {
 
 declare type noteNumType =
   { notes_count: number; classtify_count: number; tag_count: number }
+
+
+declare type MetaInfoType = {
+  posts: [string, PostInfoModel][]
+  tags: [string, string[]][]
+  classtify: [string, string[]][]
+}

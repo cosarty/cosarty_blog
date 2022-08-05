@@ -4,10 +4,7 @@ import { genNotesList, getClasstifyList } from '~/lib/api'
 import { FC } from 'react'
 import BlogInfo from '@/components/blog-info'
 
-type CategoryProps = {
-  posts: [string, PostInfoModel][]
-  classtify: [string, string[]][]
-}
+type CategoryProps = Omit<MetaInfoType, 'tags'>
 
 const Category: FC<CategoryProps> = ({ classtify = [], posts }) => {
   return (

@@ -5,10 +5,7 @@ import BlogInfo from '@/components/blog-info'
 import { useRouter } from 'next/router'
 import TagsCard from '@/components/tags-card'
 
-type TagProps = {
-  posts: [string, PostInfoModel][]
-  tags: [string, string[]][]
-}
+type TagProps = Omit<MetaInfoType, 'classtify'>
 
 const Tag: FC<TagProps> = ({ tags = [], posts }) => {
   const { query } = useRouter()

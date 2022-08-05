@@ -7,10 +7,7 @@ import { len, parseDate } from '@/utils'
 import Link from 'next/link'
 import { useImge } from '@/utils/hooks'
 import SvgGo from '@/components/svg-go'
-type HomeProps = {
-  posts: [string, PostInfoModel][]
-  classtify: [string, string[]][]
-  tags: [string, string[]][]
+type HomeProps = MetaInfoType & {
   changeCount: (state: noteNumType) => void
 }
 

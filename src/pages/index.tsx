@@ -6,10 +6,7 @@ import { genNotesList, getClasstifyList, getTagsList } from '~/lib/api'
 import { len } from '@/utils'
 import { useEffect } from 'react'
 
-type HomeProps = {
-  posts: [string, PostInfoModel][]
-  classtify: [string, string[]][]
-  tags: [string, string[]][]
+type HomeProps = MetaInfoType & {
   changeCount: (state: noteNumType) => void
 }
 

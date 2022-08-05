@@ -5,10 +5,7 @@ import { FC } from 'react'
 import BlogInfo from '@/components/blog-info'
 import { useRouter } from 'next/router'
 
-type ClasstifyProps = {
-  posts: [string, PostInfoModel][]
-  classtify: [string, string[]][]
-}
+type ClasstifyProps = Omit<MetaInfoType, 'tags'>
 
 const Classtify: FC<ClasstifyProps> = ({ classtify = [], posts }) => {
   const { query } = useRouter()

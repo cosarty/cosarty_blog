@@ -4,10 +4,7 @@ import { FC } from 'react'
 import BlogInfo from '@/components/blog-info'
 import TagsCard from '@/components/tags-card'
 
-type CategoryProps = {
-  posts: [string, PostInfoModel][]
-  tags: [string, string[]][]
-}
+type CategoryProps = Omit<MetaInfoType, 'classtify'>
 
 const Tags: FC<CategoryProps> = ({ tags = [], posts }) => {
   return (
