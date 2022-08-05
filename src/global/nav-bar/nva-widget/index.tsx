@@ -24,7 +24,7 @@ const Logo = () => {
   )
 }
 
-const Links: FC<NvaLinkProps> = ({ conf, show }) => {
+const Links: FC<NvaLinkProps> = ({ conf, show, count }) => {
   const { isMobile } = useGlobalState()
   const [activeKey, setActiveKey] = useState<string[]>([])
   const isSub = (sub: MenuItemType[]) => len(sub) !== 0
@@ -74,7 +74,7 @@ const Links: FC<NvaLinkProps> = ({ conf, show }) => {
       className={`${style['navbar-link-items']} ${show ? style['show-sidebar'] : ''}
     `}
     >
-      {isMobile && <AuthorCard />}
+      {isMobile && <AuthorCard count={count} />}
       {getKey(conf).map((key) => {
         const { name, icon, sub, href } = conf[key]
 

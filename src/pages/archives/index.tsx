@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import type { GetStaticProps } from 'next'
 import Layout from '@/global/layout'
 import style from '@/styles/page/archives.module.scss'
@@ -11,14 +11,18 @@ type HomeProps = {
   posts: [string, PostInfoModel][]
   classtify: [string, string[]][]
   tags: [string, string[]][]
+  changeCount: (state: noteNumType) => void
 }
 
-const Archives = ({ posts = [], classtify = [], tags = [] }: HomeProps) => {
+const Archives = ({ posts = [], classtify = [], tags = [], changeCount }: HomeProps) => {
   const count = {
     notes_count: len(posts),
     classtify_count: len(classtify),
     tag_count: len(tags)
   }
+  useEffect(() => {
+    changeCount(count)
+  }, [posts])
   return (
     <>
       <Layout classtify={classtify} tags={tags} count={count}>

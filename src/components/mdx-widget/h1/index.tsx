@@ -1,5 +1,5 @@
 const H1 = (props: any) => {
-  console.log('props: ', props)
+  // console.log('props: ', props)
 
   return (
     <>

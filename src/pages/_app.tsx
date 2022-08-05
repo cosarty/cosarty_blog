@@ -6,8 +6,11 @@ import NavBar from '@/global/nav-bar'
 import Provider from '@/global/provider'
 import { AppContext } from 'next/app'
 import { type AppProps } from 'next/app'
+import { useState } from 'react'
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [count, setCount] = useState<Record<string, any>>({ tag_count: 0, notes_count: 0, classtify_count: 0 })
+
   return (
     <>
       <Head>
@@ -21,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Script src="/ribbon.js" defer></Script>
       <Provider>
         <>
-          <NavBar />
+          <NavBar count={count as noteNumType} />
           <div
             style={{
               paddingTop: '4rem',
@@ -32,7 +35,15 @@ function MyApp({ Component, pageProps }: AppProps) {
               left: 0
             }}
           >
-            <Component {...pageProps} />
+            <Component
+              {...pageProps}
+              changeCount={(state: noteNumType) => {
+                //  如果保存了就不重新赋值了
+                if (!Object.keys(count).some((key) => !!count[key])) {
+                  setCount(state)
+                }
+              }}
+            />
           </div>
         </>
       </Provider>

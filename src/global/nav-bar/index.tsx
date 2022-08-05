@@ -1,9 +1,9 @@
 import style from './navbar.module.scss'
 import NvaWidget from './nva-widget'
 import { MENU_CONFIG } from '@/constants/nav-link'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 
-const NavBar = () => {
+const NavBar: FC<{ count: noteNumType }> = ({ count }) => {
   const [showSideBar, setShowSideBar] = useState(false)
 
   return (
@@ -24,7 +24,7 @@ const NavBar = () => {
         </div>
         <nav className={style['navbar-link-wrapper']}>
           <NvaWidget.Search />
-          <NvaWidget.Links conf={MENU_CONFIG} show={showSideBar} />
+          <NvaWidget.Links count={count} conf={MENU_CONFIG} show={showSideBar} />
         </nav>
       </header>
     </>

@@ -4,19 +4,24 @@ import style from '@/styles/page/home.module.scss'
 import BlogInfo from '@/components/blog-info'
 import { genNotesList, getClasstifyList, getTagsList } from '~/lib/api'
 import { len } from '@/utils'
+import { useEffect } from 'react'
 
 type HomeProps = {
   posts: [string, PostInfoModel][]
   classtify: [string, string[]][]
   tags: [string, string[]][]
+  changeCount: (state: noteNumType) => void
 }
 
-export default function Home({ posts = [], classtify = [], tags = [] }: HomeProps) {
+export default function Home({ posts = [], classtify = [], tags = [], changeCount }: HomeProps) {
   const count = {
     notes_count: len(posts),
     classtify_count: len(classtify),
     tag_count: len(tags)
   }
+  useEffect(() => {
+    changeCount(count)
+  }, [count])
   return (
     <>
       <Layout classtify={classtify} tags={tags} count={count}>

@@ -7,3 +7,7 @@ declare type PostInfoModel = {
   title: string
   tag?: string[]
 }
+
+
+declare type noteNumType =
+  { notes_count: number; classtify_count: number; tag_count: number }

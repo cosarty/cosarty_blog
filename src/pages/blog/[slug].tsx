@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import { GetStaticPaths } from 'next'
 import dynamic from 'next/dynamic'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { getNotesKey, checkNotesKey, getNoteMeta, genNotesList, getClasstifyList, getTagsList } from '~/lib/api'
 import MdxWidget from '@/components/mdx-widget'
@@ -17,15 +17,19 @@ interface BlogPostProps {
   posts: [string, PostInfoModel][]
   classtify: [string, string[]][]
   tags: [string, string[]][]
+  changeCount: (state: noteNumType) => void
 }
 
-const BlogPost: FC<BlogPostProps> = ({ meta, posts, classtify, tags }) => {
+const BlogPost: FC<BlogPostProps> = ({ meta, posts, classtify, tags, changeCount }) => {
   const { query } = useRouter()
-  const count = {
+  const count: noteNumType = {
     notes_count: len(posts),
     classtify_count: len(classtify),
     tag_count: len(tags)
   }
+  useEffect(() => {
+    changeCount(count)
+  }, [posts])
   const Blog = DynamicComponent(query.slug as string)
   const { title, tag, author, date } = meta
   return (

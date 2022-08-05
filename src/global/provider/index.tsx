@@ -1,11 +1,11 @@
-import { Context, createContext, FC, ReactElement, useContext, useState, useEffect } from 'react'
+import { Context, createContext, FC, ReactElement, useContext, useState, useEffect, Dispatch } from 'react'
 import { useSize } from '@/utils/hooks'
 import blog_config from '~/blog.conf'
 
 export type BlogMeta = typeof blog_config
 
 export type StateOption = {
-  isMobile?: boolean | null
+  isMobile: boolean | null
 } & BlogMeta
 
 let globalState: Context<StateOption>

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useGlobalState } from '@/global/provider'
 import { FC } from 'react'
 
-const AuthorCard: FC<{ count: { notes_count: number; classtify_count: number; tag_count: number } }> = ({ count }) => {
+const AuthorCard: FC<{ count: noteNumType }> = ({ count }) => {
   const { github, author, motto } = useGlobalState()
   return (
     <div className={style['author-card']}>
