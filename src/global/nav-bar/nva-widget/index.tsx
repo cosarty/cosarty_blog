@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { ChangeEvent, FC, useRef, useState } from 'react'
 import Image from 'next/image'
 import Avartar from '@/assets/caos_avatar.jpg'
 import style from './nav-widget.module.scss'
@@ -117,11 +117,41 @@ const Links: FC<NvaLinkProps> = ({ conf, show, count }) => {
 }
 
 const Search: FC<{}> = () => {
+  const [searchValue, setSearchValue] = useState('')
+  const [isShow, setIsShow] = useState(false)
+
+  const ref = useRef<HTMLInputElement>(null)
   return (
     <>
-      <div className={style['navbar-search-box']}>
-        <SvgGo icon="sousuo" style={{ height: '1.2rem', width: '1.2rem' }} />
-        <input type={'text'} />
+      <div
+        className={style['navbar-search-box']}
+        onClick={() => {
+          ref.current?.focus()
+          console.log(ref.current === document.activeElement)
+        }}
+      >
+        <SvgGo icon="sousuo" style={{ height: '1.3rem', width: '1.3rem' }} />
+        <input
+          type={'text'}
+          ref={ref}
+          value={searchValue}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setSearchValue(e.target.value)
+          }}
+          onFocus={() => {
+            setIsShow(true)
+          }}
+          onBlur={() => {
+            setIsShow(false)
+          }}
+        />
+        {isShow && searchValue && (
+          <ul className={style['suggestion']}>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+          </ul>
+        )}
       </div>
     </>
   )

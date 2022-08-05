@@ -6,7 +6,7 @@ import NavBar from '@/global/nav-bar'
 import Provider from '@/global/provider'
 import { AppContext } from 'next/app'
 import { type AppProps } from 'next/app'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [count, setCount] = useState<Record<string, any>>({ tag_count: 0, notes_count: 0, classtify_count: 0 })
