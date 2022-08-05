@@ -15,6 +15,7 @@ const useSize = () => {
   useEffect(() => {
     if (isBrowser) {
       update()
+
       window.addEventListener('resize', update)
     }
   }, [])

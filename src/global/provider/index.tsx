@@ -25,10 +25,13 @@ const Provider: FC<{ children: ReactElement }> = ({ children }) => {
   const [global, setGlobal] = useState<StateOption>({ isMobile: null, ...blog_config })
 
   useEffect(() => {
-    if (width < 650 && !global.isMobile) {
+    if (width !== 0 && width < 670 && !global.isMobile) {
       setGlobal({ ...global, isMobile: true })
     }
     if (width > 650 && global.isMobile) {
+      setGlobal({ ...global, isMobile: false })
+    }
+    if (width > 650 && global.isMobile === null) {
       setGlobal({ ...global, isMobile: false })
     }
   }, [width])

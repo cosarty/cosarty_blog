@@ -49,7 +49,9 @@ const Links: FC<NvaLinkProps> = ({ conf, show, count }) => {
   //  显示子菜单
   const showSubMenu = (key: string, status: string) => {
     {
-      if (!!isMobile) return
+      if (!!isMobile) {
+        return
+      }
       const el = document.getElementById(key)
       if (el) {
         el.style.display = status
@@ -74,7 +76,8 @@ const Links: FC<NvaLinkProps> = ({ conf, show, count }) => {
       className={`${style['navbar-link-items']} ${show ? style['show-sidebar'] : ''}
     `}
     >
-      {isMobile && <AuthorCard count={count} />}
+      {isMobile !== null && window.innerWidth < 650 && <AuthorCard count={count} />}
+
       {getKey(conf).map((key) => {
         const { name, icon, sub, href } = conf[key]
 
