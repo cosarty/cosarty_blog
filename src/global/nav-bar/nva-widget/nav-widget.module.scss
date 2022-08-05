@@ -67,6 +67,9 @@
     margin-left: 1.3rem;
     cursor: pointer;
     position: relative;
+    &:hover {
+      color: var(--btn-bg);
+    }
 
     > svg {
       margin-right: 5px;

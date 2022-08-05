@@ -10,6 +10,7 @@
   justify-content: space-between;
   z-index: 100;
   background-color: var(--card-box-bg);
+  z-index: 101;
 }
 
 .navbar-link-wrapper {
@@ -23,6 +24,17 @@
 
 .nav-logo-wrapper {
   display: inline-flex;
+}
+.side-mask {
+  width: 100%;
+  height: 100%;
+
+  position: fixed;
+  left: 0;
+  margin: 0 auto;
+  top: 0;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  z-index: 100;
 }
 
 .switch-container {
