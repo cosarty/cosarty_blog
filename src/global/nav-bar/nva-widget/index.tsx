@@ -126,6 +126,7 @@ const Search: FC<{}> = () => {
     // tslint:disable-next-line: no-bitwise
     searchValue ? setSearch(posts.filter(([_, meta]) => ~meta.title.search(searchValue))) : setSearch([])
   }
+
   const renderOption = (title: string) => {
     const idx = title.indexOf(searchValue)
     return [

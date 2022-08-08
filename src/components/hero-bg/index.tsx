@@ -1,23 +1,34 @@
 import style from './hero-bg.module.scss'
-import { FC } from 'react'
+import { FC, useRef } from 'react'
 import { useImge } from '@/utils/hooks'
 import { useGlobalState } from '@/global/provider'
-const HeroBg: FC<{ src?: string; topheight?: number; topfixed?: boolean; showContent?: boolean }> = ({
-  src = '',
-  topheight = 95,
-  topfixed = true,
-  showContent = true
-}) => {
+const HeroBg: FC<{
+  src?: string
+  topheight?: number
+  topfixed?: boolean
+  showContent?: boolean
+}> = ({ src = '', topheight = 95, topfixed = true, showContent = true }) => {
   const imgSrc = useImge(src)
   const { descript, label } = useGlobalState()
+  const heroRef = useRef<HTMLDivElement>(null)
 
   return (
     <div
+      ref={heroRef}
       className={style['hero']}
       style={{
         backgroundImage: `url(${imgSrc})`,
         height: `${topheight}vh`,
         backgroundAttachment: `${topfixed ? 'fixed' : 'scroll'}`
+      }}
+      onClick={() => {
+        // document.body.scrollTo({ top: heroRef.current!.getBoundingClientRect().bottom })
+        // getTop(heroRef.current!.getBoundingClientRect().bottom ?? 0)
+        document.documentElement.scrollTo({
+          top: heroRef.current?.offsetHeight,
+
+          behavior: 'smooth'
+        })
       }}
     >
       {showContent && (
@@ -26,6 +37,7 @@ const HeroBg: FC<{ src?: string; topheight?: number; topfixed?: boolean; showCon
           <p>{descript}</p>
         </div>
       )}
+      <div className={style['downward']}></div>
     </div>
   )
 }
