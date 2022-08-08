@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useRef, useState } from 'react'
+import { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Avartar from '@/assets/caos_avatar.jpg'
 import style from './nav-widget.module.scss'
@@ -123,22 +123,29 @@ const Search: FC<{}> = () => {
   const { posts = [] } = useGlobalState()
 
   const searchNotes = () => {
-    const searchNote = posts.filter(([name, meta]) => {
-      // ~-1==0
-      return ~meta.title.search(searchValue)
-    })
-    setSearch(searchNote)
+    // tslint:disable-next-line: no-bitwise
+    searchValue ? setSearch(posts.filter(([_, meta]) => ~meta.title.search(searchValue))) : setSearch([])
   }
   const renderOption = (title: string) => {
-    const [pre, next] = title.split(searchValue)
-    return [pre, <span style={{ color: 'aqua' }}>{searchValue}</span>, next]
+    const idx = title.indexOf(searchValue)
+    return [
+      title.slice(0, idx),
+      <span key={searchValue} style={{ color: 'aqua' }}>
+        {searchValue}
+      </span>,
+      title.slice(idx + searchValue.length)
+    ]
   }
   const ref = useRef<HTMLInputElement>(null)
+  useEffect(() => {
+    searchNotes()
+  }, [searchValue])
+
   return (
     <>
       <div
         className={style['navbar-search-box']}
-        onClick={() => {
+        onClick={(e) => {
           ref.current?.focus()
           // console.log(ref.current === document.activeElement)
         }}
@@ -150,25 +157,29 @@ const Search: FC<{}> = () => {
           value={searchValue}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             setSearchValue(e.target.value)
-            searchNotes()
           }}
           onFocus={() => {
             setIsShow(true)
           }}
           onBlur={() => {
-            setIsShow(false)
+            setTimeout(() => {
+              setIsShow(false)
+            }, 200)
           }}
           // onInput={searchNotes}
         />
-        {isShow && searchValue && (
-          <ul className={style['suggestion']}>
+        {
+          <ul
+            className={style['suggestion']}
+            style={{ display: isShow && searchValue && search.length > 0 ? 'block' : 'none' }}
+          >
             {search.map(([name, meta]) => (
               <Link key={name} href={{ pathname: '/blog/[slug]', query: { slug: name } }}>
                 <li>{renderOption(meta.title)}</li>
               </Link>
             ))}
           </ul>
-        )}
+        }
       </div>
     </>
   )

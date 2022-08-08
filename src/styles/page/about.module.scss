@@ -1,10 +1,12 @@
 @import '../mixin/global-mixin.scss';
 
 .about-wrapper {
-  min-height: 100vh;
+  // min-height: 100vh;
+  margin: 30px 30px 0;
+
   flex: auto;
-  background-color: white;
-  @include box-show;
+  background-color: var(--card-box-bg);
+  box-shadow: var(--box-shadow);
   border-radius: 15px;
   padding: 20px 15px;
   margin-bottom: 20px;

@@ -53,6 +53,27 @@
       width: 12rem;
     }
   }
+
+  > ul {
+    position: absolute;
+    top: 100%;
+    min-width: 100%;
+    border: 1px solid #cfd4db;
+    border-radius: 8px;
+    padding: 3px;
+    li {
+      padding: 10px;
+      max-width: 16rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      &:hover {
+        background-color: black;
+        cursor: pointer;
+      }
+    }
+  }
+
   .suggestion {
     background-color: var(--card-box-bg);
   }

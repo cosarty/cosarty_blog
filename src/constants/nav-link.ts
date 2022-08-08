@@ -11,18 +11,13 @@ const MENU_CONFIG = {
     href: '/archives',
     sub: []
   },
-  blogroll: {
-    name: '友链',
-    icon: 'youhuiquan-',
-    href: '/friends',
-    sub: []
-  },
-  about: {
-    name: '关于',
-    icon: 'guanyuwomen',
-    href: '/about',
-    sub: []
-  },
+  // blogroll: {
+  //   name: '友链',
+  //   icon: 'youhuiquan-',
+  //   href: '/friends',
+  //   sub: []
+  // },
+
   collect: {
     name: '很棒的内容',
     icon: 'wenzhang',
@@ -34,7 +29,13 @@ const MENU_CONFIG = {
         href: '/',
       }
     ]
-  }
+  },
+  about: {
+    name: '关于',
+    icon: 'guanyuwomen',
+    href: '/about',
+    sub: []
+  },
 
 }
 
