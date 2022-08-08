@@ -118,8 +118,21 @@ const Links: FC<NvaLinkProps> = ({ conf, show, count }) => {
 
 const Search: FC<{}> = () => {
   const [searchValue, setSearchValue] = useState('')
+  const [search, setSearch] = useState<[string, PostInfoModel][]>([])
   const [isShow, setIsShow] = useState(false)
+  const { posts = [] } = useGlobalState()
 
+  const searchNotes = () => {
+    const searchNote = posts.filter(([name, meta]) => {
+      // ~-1==0
+      return ~meta.title.search(searchValue)
+    })
+    setSearch(searchNote)
+  }
+  const renderOption = (title: string) => {
+    const [pre, next] = title.split(searchValue)
+    return [pre, <span style={{ color: 'aqua' }}>{searchValue}</span>, next]
+  }
   const ref = useRef<HTMLInputElement>(null)
   return (
     <>
@@ -127,7 +140,7 @@ const Search: FC<{}> = () => {
         className={style['navbar-search-box']}
         onClick={() => {
           ref.current?.focus()
-          console.log(ref.current === document.activeElement)
+          // console.log(ref.current === document.activeElement)
         }}
       >
         <SvgGo icon="sousuo" style={{ height: '1.3rem', width: '1.3rem' }} />
@@ -137,6 +150,7 @@ const Search: FC<{}> = () => {
           value={searchValue}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             setSearchValue(e.target.value)
+            searchNotes()
           }}
           onFocus={() => {
             setIsShow(true)
@@ -144,12 +158,15 @@ const Search: FC<{}> = () => {
           onBlur={() => {
             setIsShow(false)
           }}
+          // onInput={searchNotes}
         />
         {isShow && searchValue && (
           <ul className={style['suggestion']}>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
+            {search.map(([name, meta]) => (
+              <Link key={name} href={{ pathname: '/blog/[slug]', query: { slug: name } }}>
+                <li>{renderOption(meta.title)}</li>
+              </Link>
+            ))}
           </ul>
         )}
       </div>

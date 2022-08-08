@@ -14,7 +14,7 @@ declare type noteNumType =
 
 
 declare type MetaInfoType = {
-  posts: [string, PostInfoModel][]
-  tags: [string, string[]][]
-  classtify: [string, string[]][]
+  posts?: [string, PostInfoModel][]
+  tags?: [string, string[]][]
+  classtify?: [string, string[]][]
 }

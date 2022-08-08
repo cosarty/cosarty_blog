@@ -8,7 +8,7 @@ import { AppContext } from 'next/app'
 import { type AppProps } from 'next/app'
 import { useState } from 'react'
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps & Record<string, any>) {
   const [count, setCount] = useState<Record<string, any>>({ tag_count: 0, notes_count: 0, classtify_count: 0 })
 
   return (
@@ -52,6 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext)
+
   return { ...appProps }
 }
 
