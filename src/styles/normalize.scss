@@ -37,7 +37,6 @@ ul,
 ol,
 li,
 p,
-blockquote,
 pre,
 hr,
 figure,
@@ -54,7 +53,8 @@ textarea,
 menu {
   margin: 0;
   padding: 0;
-  color: var(--text-highlight-color);
+  color: inherit;
+  font-weight: normal;
 }
 header,
 footer,
@@ -88,11 +88,7 @@ abbr {
   border: 0;
 }
 i,
-cite,
-em,
-var,
-address,
-dfn {
+cite {
   font-style: normal;
 }
 [hidefocus],
@@ -137,18 +133,7 @@ a,
 button {
   cursor: pointer;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-em,
-strong,
-b {
-  font-weight: bold;
-}
-del,
+
 ins,
 u,
 s,
@@ -162,6 +147,7 @@ input,
 button,
 select,
 keygen,
+a,
 legend {
   color: var(--text-highlight-color);
   outline: 0;
@@ -169,10 +155,10 @@ legend {
 body {
   background: #fff;
 }
-a,
-a:hover {
-  color: #333;
-}
+// a,
+// a:hover {
+//   color: #333;
+// }
 
 input {
   border: none;

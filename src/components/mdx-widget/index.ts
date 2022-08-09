@@ -1,16 +1,13 @@
 
-import { ReactNode } from 'react';
 import CodeBlock from './code-block';
-import H1 from './h1';
+import Tag from './Tag'
 
 
 
-
-
+// 格式化组件
 const components = {
   pre: CodeBlock,
-  h1: H1
-
+  ...Tag
 };
 
 export default components

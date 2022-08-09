@@ -1,0 +1,73 @@
+.tag-a {
+  line-height: 2;
+  padding: 3px;
+
+  border-bottom: 3px solid var(--heo-main);
+  border-radius: 3px;
+  &:hover {
+    background-color: var(--heo-main);
+    color: white;
+  }
+}
+
+.tag-code {
+  // color: #79ffe1;
+  color: #f47466;
+  background: rgba(27, 31, 35);
+  border-radius: 2px;
+  font-size: 0.9em;
+  white-space: pre-wrap;
+
+  &::before,
+  &::after {
+    content: '`';
+  }
+}
+
+.tag-blockquote {
+  border-left: 0.3rem solid var(--heo-main);
+  background-color: rgb(236, 247, 254);
+  color: #363636 !important;
+  padding: 0.2rem;
+  padding-left: 1rem;
+  margin: 1rem 0;
+}
+
+.tag-ul {
+  padding: 0 0 0 0.5rem;
+  color: inherit;
+  li {
+    cursor: pointer;
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+    position: relative;
+    &::before {
+      position: absolute;
+      left: 0;
+      top: 2px;
+      vertical-align: top;
+      content: '';
+      width: 5px;
+      height: 5px;
+      border: 5px solid var(--btn-bg);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    &:hover {
+      &::before {
+        border-color: #f47466;
+      }
+    }
+  }
+}
+
+.tag-img {
+  cursor: pointer;
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: contain;
+  object-position: center top;
+  border-radius: 10px;
+  margin: 1rem 0;
+}

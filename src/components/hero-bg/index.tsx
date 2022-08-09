@@ -21,23 +21,27 @@ const HeroBg: FC<{
         height: `${topheight}vh`,
         backgroundAttachment: `${topfixed ? 'fixed' : 'scroll'}`
       }}
-      onClick={() => {
-        // document.body.scrollTo({ top: heroRef.current!.getBoundingClientRect().bottom })
-        // getTop(heroRef.current!.getBoundingClientRect().bottom ?? 0)
-        document.documentElement.scrollTo({
-          top: heroRef.current?.offsetHeight,
-
-          behavior: 'smooth'
-        })
-      }}
     >
       {showContent && (
-        <div className={style['motto']}>
-          <h1>{label}</h1>
-          <p>{descript}</p>
-        </div>
+        <>
+          <div className={style['motto']}>
+            <h1>{label}</h1>
+            <p>{descript}</p>
+          </div>{' '}
+          <div
+            className={style['downward']}
+            onClick={() => {
+              // document.body.scrollTo({ top: heroRef.current!.getBoundingClientRect().bottom })
+              // getTop(heroRef.current!.getBoundingClientRect().bottom ?? 0)
+              document.documentElement.scrollTo({
+                top: heroRef.current?.offsetHeight,
+
+                behavior: 'smooth'
+              })
+            }}
+          ></div>
+        </>
       )}
-      <div className={style['downward']}></div>
     </div>
   )
 }

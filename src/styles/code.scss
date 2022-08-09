@@ -1,0 +1,27 @@
+pre[class*='language-'],
+code[class*='language-'] {
+  color: #4ec9b0 !important;
+  .token.comment,
+  .token.prolog,
+  .token.doctype,
+  .token.cdata {
+    color: #6a9955;
+  }
+
+  .token.punctuation {
+    color: #d4d4d4;
+  }
+  .token-line {
+    height: 1.6em;
+  }
+
+  .token.property,
+  .token.tag,
+  .token.boolean,
+  .token.number,
+  .token.constant,
+  .token.symbol,
+  .token.deleted {
+    color: #b5cea8;
+  }
+}
