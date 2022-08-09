@@ -17,7 +17,8 @@
   border-radius: 2px;
   font-size: 0.9em;
   white-space: pre-wrap;
-
+  border-radius: 3px;
+  margin: 0 5px;
   &::before,
   &::after {
     content: '`';
@@ -65,9 +66,21 @@
   cursor: pointer;
   width: 100%;
   height: auto;
-  max-height: 200px;
-  object-fit: contain;
+  max-height: 300px;
+  // object-fit: contain;
   object-position: center top;
   border-radius: 10px;
   margin: 1rem 0;
+}
+.tag-h1 {
+  // 防止锚点置顶 bug修复
+  /*
+  margin-top 负值，元素向上移动
+  margin-bottom 负值，下方元素向上移动
+  margin-left 负值，元素向左移动
+  margin-right 负值，右侧元素向左移动
+  */
+  margin-top: -3.1rem;
+  padding-top: 4.6rem;
+  margin-bottom: 1.3rem;
 }

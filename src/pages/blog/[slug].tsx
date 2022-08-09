@@ -27,8 +27,20 @@ const BlogPost: FC<BlogPostProps> = ({ meta, posts, classtify, tags, changeCount
   useEffect(() => {
     changeCount(count)
   }, [posts])
+  // 动态获取文章
   const Blog = DynamicComponent(query.slug as string)
+
   const { title, tag, author, date } = meta
+
+  useEffect(() => {
+    ;(async () => {
+      const res = await fetch(window.location.origin + `/api/getmenu/${query.slug}`)
+      const menu = await res.json()
+      console.log('menu: ', menu)
+      // console.log('menu: ', menu)
+    })()
+  }, [])
+
   return (
     <>
       <Layout

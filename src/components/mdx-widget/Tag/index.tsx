@@ -13,14 +13,21 @@ const Code = (props: any) => {
   return <code {...props} className={style['tag-code']}></code>
 }
 
-const H1 = (props: any) => {
-  // console.log('props: ', props)
-
+const H1 = ({ children }: any) => {
   return (
-    <>
-      <h1 {...props}></h1>
-    </>
+    // <a href={`#${children}`} style={{ display: 'block', height: '100%' }} title="children">
+
+    // </a>
+    <h1 style={{ fontSize: '2.3em' }} id={children} className={style['tag-h1']}>
+      {children}
+    </h1>
   )
+}
+const H2 = (props: any) => {
+  return <h1 {...props} style={{ fontSize: '1.8em' }}></h1>
+}
+const H3 = (props: any) => {
+  return <h1 {...props} style={{ fontSize: '1.5em' }}></h1>
 }
 
 const Blockquote = (props: any) => {
@@ -45,5 +52,7 @@ export default {
   blockquote: Blockquote,
   ul: Ul,
   ol: Ol,
-  img: Img
+  img: Img,
+  h2: H2,
+  h3: H3
 }

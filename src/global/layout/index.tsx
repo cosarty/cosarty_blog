@@ -36,23 +36,20 @@ const Layout: React.FC<LayoutIn> = ({
       <div className={style['layout-container']}>
         <div className={style['home-blog-wrapper']}>
           <div className={style['blog-list']}>{children}</div>
-          <div className={style['info-wrapper']}>
-            {isMobile !== null && !isMobile && (
-              <>
-                {/*  tslint:disable-next-line: no-non-null-assertion */}
-                <AuthorCard count={count} /> <hr />
-              </>
-            )}
-
-            {!isPosts && (
-              <>
-                <h3>分类</h3>
-                <ClasstifyCard classtify={classtify} />
-                <h3>标签</h3>
-                <TagsCard tags={tags} />
-              </>
-            )}
-          </div>
+          {isMobile !== null && !isMobile && (
+            <div className={style['info-wrapper']}>
+              {/*  tslint:disable-next-line: no-non-null-assertion */}
+              <AuthorCard count={count} /> <hr />
+              {!isPosts && (
+                <>
+                  <h3>分类</h3>
+                  <ClasstifyCard classtify={classtify} />
+                  <h3>标签</h3>
+                  <TagsCard tags={tags} />
+                </>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </>
