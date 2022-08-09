@@ -115,6 +115,11 @@
     position: relative;
     &:hover {
       color: var(--btn-bg);
+      & {
+        .submenu {
+          color: var(--text-highlight-color);
+        }
+      }
     }
 
     > svg {

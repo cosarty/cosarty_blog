@@ -1,7 +1,6 @@
-import { GetStaticProps } from 'next'
-import { GetStaticPaths } from 'next'
+import { GetStaticProps, GetStaticPaths } from 'next'
 import dynamic from 'next/dynamic'
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { getNotesKey, checkNotesKey, getNoteMeta, genNotesList, getClasstifyList, getTagsList } from '~/lib/api'
 import MdxWidget from '@/components/mdx-widget'
@@ -18,7 +17,9 @@ type BlogPostProps = MetaInfoType & {
 }
 
 const BlogPost: FC<BlogPostProps> = ({ meta, posts, classtify, tags, changeCount }) => {
-  const { query } = useRouter()
+  const router = useRouter()
+  const [currentHash, setCurrentHash] = useState('')
+  const [menu, setMenu] = useState<TitleDepType[]>([])
   const count: noteNumType = {
     notes_count: len(posts),
     classtify_count: len(classtify),
@@ -28,18 +29,54 @@ const BlogPost: FC<BlogPostProps> = ({ meta, posts, classtify, tags, changeCount
     changeCount(count)
   }, [posts])
   // 动态获取文章
-  const Blog = DynamicComponent(query.slug as string)
+  const Blog = DynamicComponent(router.query.slug as string)
 
   const { title, tag, author, date } = meta
 
+  const hashChangeHendle = () => {
+    const hash = decodeURIComponent(location.hash.replace(/[\s\S]+(?=#)/, ''))
+    setCurrentHash(hash)
+  }
+
   useEffect(() => {
+    window.addEventListener('hashchange', hashChangeHendle)
+    // tslint:disable-next-line: align
     ;(async () => {
-      const res = await fetch(window.location.origin + `/api/getmenu/${query.slug}`)
-      const menu = await res.json()
-      console.log('menu: ', menu)
-      // console.log('menu: ', menu)
+      const res = await fetch(window.location.origin + `/api/getmenu/${router.query.slug}`)
+      const menu = (await res.json()) as TitleDepType[]
+      setMenu(menu)
     })()
+
+    return () => {
+      window.removeEventListener('hashchange', hashChangeHendle)
+    }
   }, [])
+
+  // 渲染目录
+  const Catalog = (menuDep: TitleDepType[]) => {
+    return (
+      menuDep.length > 0 && (
+        <ol>
+          {menuDep.map((m, idx) => (
+            <li key={idx}>
+              <>
+                <a
+                  className={`${currentHash === `#${m.title}` ? style['active'] : ''}`}
+                  href={`#${m.title}`}
+                  // style={{
+                  //   color: currentHash === `#${m.title}` || !currentHash ? 'red' : 'green'
+                  // }}
+                >
+                  {m.title}
+                </a>
+                {Catalog(m.sub)}
+              </>
+            </li>
+          ))}
+        </ol>
+      )
+    )
+  }
 
   return (
     <>
@@ -50,10 +87,12 @@ const BlogPost: FC<BlogPostProps> = ({ meta, posts, classtify, tags, changeCount
         isPosts
         showContent={false}
         count={count}
+        // 渲染目录
+        postCustom={() => <div className={style['catalog-box']}>{Catalog(menu)}</div>}
       >
         <>
           <div className={style['notes-wrapper']}>
-            <div className={style['content']}>
+            <div className={style.content}>
               <h2>{title}</h2>
               <hr />
               <div className={style['post-meta']}>
@@ -91,7 +130,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   const posts = await genNotesList()
-  if (!(await checkNotesKey(params.slug))) return { notFound: true }
+  if (!(await checkNotesKey(params.slug))) {
+    return { notFound: true }
+  }
   const classtify = await getClasstifyList()
   const tags = await getTagsList()
   return {

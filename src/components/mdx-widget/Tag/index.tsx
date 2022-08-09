@@ -27,22 +27,26 @@ const H1 = ({ children }: any) => {
     </h1>
   )
 }
-const H2 = (props: any) => {
+const H2 = ({ children }: any) => {
   return (
     <h2
-      {...props}
+      id={children}
       style={{ fontSize: '1.8em', backgroundSize: '1.8rem', backgroundPosition: ' left -0.3rem top 5rem' }}
       className={style['tag-h']}
-    ></h2>
+    >
+      {children}
+    </h2>
   )
 }
-const H3 = (props: any) => {
+const H3 = ({ children }: any) => {
   return (
     <h3
-      {...props}
+      id={children}
       style={{ fontSize: '1.5em', backgroundSize: '1.5rem', backgroundPosition: ' left -0.2rem top 5rem' }}
       className={style['tag-h']}
-    ></h3>
+    >
+      {children}
+    </h3>
   )
 }
 

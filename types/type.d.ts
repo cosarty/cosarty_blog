@@ -18,3 +18,6 @@ declare type MetaInfoType = {
   tags: [string, string[]][]
   classtify: [string, string[]][]
 }
+declare type TitleDepType = {
+  title: string, sub: TitleDepType[]
+}

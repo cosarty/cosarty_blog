@@ -44,3 +44,33 @@
     }
   }
 }
+
+.catalog-box {
+  position: fixed;
+  top: 4rem;
+  ol {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+
+    li {
+      width: 100%;
+      padding: 0 10px;
+
+      a {
+        display: block;
+        height: inherit;
+        line-height: 2.5rem;
+        padding: 0 10px;
+        &:not(&.active):hover {
+          color: aqua;
+        }
+        &.active {
+          background-color: var(--btn-bg);
+        }
+
+        // color: var(--btn-bg);
+      }
+    }
+  }
+}

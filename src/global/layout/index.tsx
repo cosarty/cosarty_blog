@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import HeroBg from '@/components/hero-bg'
 import style from './layout.module.scss'
 import AuthorCard from '@/components/author-card'
@@ -16,6 +16,7 @@ interface LayoutIn {
   tags?: [string, string[]][]
   showContent?: boolean
   count: { notes_count: number; classtify_count: number; tag_count: number }
+  postCustom?: () => ReactNode
 }
 
 const Layout: React.FC<LayoutIn> = ({
@@ -27,7 +28,8 @@ const Layout: React.FC<LayoutIn> = ({
   classtify = [],
   tags,
   showContent,
-  count
+  count,
+  postCustom
 }) => {
   const { isMobile } = useGlobalState()
   return (
@@ -39,15 +41,17 @@ const Layout: React.FC<LayoutIn> = ({
           {isMobile !== null && !isMobile && (
             <div className={style['info-wrapper']}>
               {/*  tslint:disable-next-line: no-non-null-assertion */}
-              <AuthorCard count={count} /> <hr />
+              <AuthorCard count={count} />
               {!isPosts && (
                 <>
+                  <hr />
                   <h3>分类</h3>
                   <ClasstifyCard classtify={classtify} />
                   <h3>标签</h3>
                   <TagsCard tags={tags} />
                 </>
               )}
+              {postCustom?.()}
             </div>
           )}
         </div>

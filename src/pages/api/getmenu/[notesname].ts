@@ -1,15 +1,22 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { genNotesList } from '~/lib/api'
 import { readFile } from 'fs/promises';
 import { join } from 'path';
-// 
+
+
 export default async function getmenu(req: NextApiRequest, res: NextApiResponse) {
 
-  console.log(process.cwd())
-
+  /**
+   * [{title:'',sub:[{title:'}]}]
+   * 目前只做三级目录
+   */
   const notesInfo = await readFile(join(process.cwd(), 'posts/notes', `${req.query.notesname}.mdx`), 'utf-8')
-  console.log(Array.from(notesInfo.matchAll(/#{1,6}(.*?)(?=\r\n)/g), (a => a[0].trim())))
-  // const { pid } = req.query
-  const notes = await genNotesList()
-  res.status(200).send(notes)
+  const t = Array.from(notesInfo.matchAll(/#{1,6}(.*?)(?=\r\n)/g), (a => a[0].split(/\s+/)))
+  const titleDep = t.reduce((pre, [mold, title]) => {
+    if (mold.length === 1) { pre.push({ title, sub: [] }) }
+    if (mold.length === 2) { pre.at(-1)!.sub.push({ title, sub: [] }) }
+    if (mold.length === 3) { pre.at(-1)!.sub.at(-1)!.sub.push({ title, sub: [] }) }
+    return pre
+  }, [] as TitleDepType[])
+
+  res.status(200).send(titleDep)
 }
