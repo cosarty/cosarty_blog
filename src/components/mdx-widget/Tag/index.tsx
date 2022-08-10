@@ -1,32 +1,33 @@
-import style from './tag.module.scss'
-import { useImge } from '@/utils/hooks'
+import style from './tag.module.scss';
+import { useImge } from '@/utils/hooks';
+import { useRef } from 'react';
 
 const P = (props: any) => {
-  return <p {...props} style={{ lineHeight: 2 }}></p>
-}
+  return <p {...props} style={{ lineHeight: 2 }}></p>;
+};
 
 const A = (props: any) => {
-  return <a {...props} className={style['tag-a']}></a>
-}
+  return <a {...props} className={style['tag-a']}></a>;
+};
 
 const Code = (props: any) => {
-  return <code {...props} className={style['tag-code']}></code>
-}
+  return <code {...props} className={style['tag-code']}></code>;
+};
 
 const H1 = ({ children }: any) => {
-  return (
-    // <a href={`#${children}`} style={{ display: 'block', height: '100%' }} title="children">
+  const h1ref = useRef<HTMLDivElement>(null);
 
-    // </a>
+  return (
     <h1
+      ref={h1ref}
       style={{ fontSize: '2.3em', backgroundSize: '2.3rem', backgroundPosition: ' left -0.5rem top 5rem' }}
       id={children}
       className={style['tag-h']}
     >
       {children}
     </h1>
-  )
-}
+  );
+};
 const H2 = ({ children }: any) => {
   return (
     <h2
@@ -36,8 +37,8 @@ const H2 = ({ children }: any) => {
     >
       {children}
     </h2>
-  )
-}
+  );
+};
 const H3 = ({ children }: any) => {
   return (
     <h3
@@ -47,22 +48,22 @@ const H3 = ({ children }: any) => {
     >
       {children}
     </h3>
-  )
-}
+  );
+};
 
 const Blockquote = (props: any) => {
-  return <blockquote {...props} className={style['tag-blockquote']}></blockquote>
-}
+  return <blockquote {...props} className={style['tag-blockquote']}></blockquote>;
+};
 
 const Ul = (props: any) => {
-  return <ul {...props} className={style['tag-ul']}></ul>
-}
+  return <ul {...props} className={style['tag-ul']}></ul>;
+};
 const Ol = (props: any) => {
-  return <ol {...props} className={style['tag-ol']}></ol>
-}
+  return <ol {...props} className={style['tag-ol']}></ol>;
+};
 const Img = (props: any) => {
-  return <img {...props} className={style['tag-img']} src={useImge(`blog/${props.src}`)} />
-}
+  return <img {...props} className={style['tag-img']} src={useImge(`blog/${props.src}`)} />;
+};
 
 export default {
   a: A,
@@ -75,4 +76,4 @@ export default {
   img: Img,
   h2: H2,
   h3: H3
-}
+};

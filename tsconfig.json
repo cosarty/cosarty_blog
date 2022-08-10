@@ -30,7 +30,8 @@
     "noEmit": true,
     "incremental": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    
   },
   // "include": ["components", "../../shims/*"],
   "exclude": [
@@ -39,6 +40,6 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
+    "**/*.tsx", "src/utils/hooks/useScroll.ts",
   ]
 }

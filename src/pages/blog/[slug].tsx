@@ -1,56 +1,90 @@
-import { GetStaticProps, GetStaticPaths } from 'next'
-import dynamic from 'next/dynamic'
-import { FC, useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { getNotesKey, checkNotesKey, getNoteMeta, genNotesList, getClasstifyList, getTagsList } from '~/lib/api'
-import MdxWidget from '@/components/mdx-widget'
-import Layout from '@/global/layout'
-import style from '@/styles/page/blog.module.scss'
-import SvgGo from '@/components/svg-go'
-import { len } from '@/utils'
+import { GetStaticProps, GetStaticPaths } from 'next';
+import dynamic from 'next/dynamic';
+import { FC, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { getNotesKey, checkNotesKey, getNoteMeta, genNotesList, getClasstifyList, getTagsList } from '~/lib/api';
+import MdxWidget from '@/components/mdx-widget';
+import Layout from '@/global/layout';
+import style from '@/styles/page/blog.module.scss';
+import SvgGo from '@/components/svg-go';
+import { len, debounce, throttle } from '@/utils';
 
-const DynamicComponent = (key: string) => dynamic(() => import(`~/posts/notes/${key}.mdx`))
+const DynamicComponent = (key: string) => dynamic(() => import(`~/posts/notes/${key}.mdx`));
 
 type BlogPostProps = MetaInfoType & {
-  meta: PostInfoModel
-  changeCount: (state: noteNumType) => void
-}
+  meta: PostInfoModel;
+  changeCount: (state: noteNumType) => void;
+};
 
 const BlogPost: FC<BlogPostProps> = ({ meta, posts, classtify, tags, changeCount }) => {
-  const router = useRouter()
-  const [currentHash, setCurrentHash] = useState('')
-  const [menu, setMenu] = useState<TitleDepType[]>([])
+  const router = useRouter();
+  const [currentHash, setCurrentHash] = useState('');
+  const [menu, setMenu] = useState<TitleDepType[]>([]);
+
   const count: noteNumType = {
     notes_count: len(posts),
     classtify_count: len(classtify),
     tag_count: len(tags)
-  }
+  };
   useEffect(() => {
-    changeCount(count)
-  }, [posts])
+    changeCount(count);
+  }, [posts]);
   // 动态获取文章
-  const Blog = DynamicComponent(router.query.slug as string)
+  const Blog = DynamicComponent(router.query.slug as string);
 
-  const { title, tag, author, date } = meta
+  const { title, tag, author, date } = meta;
 
+  // 判断最大可滚动区域
+  const maxScroll = () =>
+    document.documentElement.scrollTop + 2 >
+    document.documentElement.offsetHeight - document.documentElement.clientHeight;
+
+  // hash事件
   const hashChangeHendle = () => {
-    const hash = decodeURIComponent(location.hash.replace(/[\s\S]+(?=#)/, ''))
-    setCurrentHash(hash)
-  }
+    if (maxScroll()) {
+      setCurrentHash(decodeURIComponent(location.hash).replace('#', ''));
+    }
+  };
+
+  const scrollHandlehlight = debounce(() => {
+    const catalogs = Array.from(document.querySelectorAll('[class*=tag-h]'));
+    if (currentHash === '') {
+      setCurrentHash(catalogs[0]?.id);
+    }
+    // tslint:disable-next-line: forin
+    for (const idx in catalogs) {
+      if (catalogs[idx].getBoundingClientRect().top < 10) {
+        setCurrentHash(catalogs[idx].id);
+        continue;
+      }
+      if (maxScroll() && catalogs[idx].getBoundingClientRect().top > 10) {
+        const hash = decodeURIComponent(location.hash).replace('#', '');
+        const ci = catalogs.findIndex((c) => c.id === hash);
+        if (ci >= Number(idx)) {
+          setCurrentHash(hash);
+        }
+
+        break;
+      }
+    }
+  }, 50);
 
   useEffect(() => {
-    window.addEventListener('hashchange', hashChangeHendle)
     // tslint:disable-next-line: align
-    ;(async () => {
-      const res = await fetch(window.location.origin + `/api/getmenu/${router.query.slug}`)
-      const menu = (await res.json()) as TitleDepType[]
-      setMenu(menu)
-    })()
-
+    (async () => {
+      const res = await fetch(window.location.origin + `/api/getmenu/${router.query.slug}`);
+      const menu = (await res.json()) as TitleDepType[];
+      setMenu(menu);
+      // 初始化目录
+      setCurrentHash(document.querySelector('[class*=tag-h]')!.id);
+    })();
+    window.addEventListener('scroll', scrollHandlehlight);
+    window.addEventListener('hashchange', hashChangeHendle);
     return () => {
-      window.removeEventListener('hashchange', hashChangeHendle)
-    }
-  }, [])
+      window.removeEventListener('scroll', scrollHandlehlight);
+      window.removeEventListener('hashchange', hashChangeHendle);
+    };
+  }, []);
 
   // 渲染目录
   const Catalog = (menuDep: TitleDepType[]) => {
@@ -60,13 +94,7 @@ const BlogPost: FC<BlogPostProps> = ({ meta, posts, classtify, tags, changeCount
           {menuDep.map((m, idx) => (
             <li key={idx}>
               <>
-                <a
-                  className={`${currentHash === `#${m.title}` ? style['active'] : ''}`}
-                  href={`#${m.title}`}
-                  // style={{
-                  //   color: currentHash === `#${m.title}` || !currentHash ? 'red' : 'green'
-                  // }}
-                >
+                <a className={`${currentHash === m.title ? style['active'] : ''}`} href={`#${m.title}`}>
                   {m.title}
                 </a>
                 {Catalog(m.sub)}
@@ -75,8 +103,8 @@ const BlogPost: FC<BlogPostProps> = ({ meta, posts, classtify, tags, changeCount
           ))}
         </ol>
       )
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -117,27 +145,27 @@ const BlogPost: FC<BlogPostProps> = ({ meta, posts, classtify, tags, changeCount
         </>
       </Layout>
     </>
-  )
-}
+  );
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  await genNotesList()
-  const paths = (await getNotesKey()).map((key) => ({ params: { slug: key } }))
+  await genNotesList();
+  const paths = (await getNotesKey()).map((key) => ({ params: { slug: key } }));
   return {
     paths,
     fallback: false
-  }
-}
+  };
+};
 export const getStaticProps: GetStaticProps = async ({ params }: any) => {
-  const posts = await genNotesList()
+  const posts = await genNotesList();
   if (!(await checkNotesKey(params.slug))) {
-    return { notFound: true }
+    return { notFound: true };
   }
-  const classtify = await getClasstifyList()
-  const tags = await getTagsList()
+  const classtify = await getClasstifyList();
+  const tags = await getTagsList();
   return {
     props: { meta: getNoteMeta(params.slug), posts, classtify, tags }
-  }
-}
+  };
+};
 
-export default BlogPost
+export default BlogPost;

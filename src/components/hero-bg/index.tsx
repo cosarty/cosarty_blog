@@ -35,7 +35,6 @@ const HeroBg: FC<{
               // getTop(heroRef.current!.getBoundingClientRect().bottom ?? 0)
               document.documentElement.scrollTo({
                 top: heroRef.current?.offsetHeight,
-
                 behavior: 'smooth'
               })
             }}
