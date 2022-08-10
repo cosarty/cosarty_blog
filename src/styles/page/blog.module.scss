@@ -49,22 +49,36 @@
 }
 
 .catalog-box {
-  position: fixed;
-  top: 4rem;
+  padding: 10px 0;
+  &.fixed {
+    position: fixed;
+    top: 4.5rem;
+    width: 250px;
+    border-radius: 10px;
+    @include box-show;
+  }
+  > .catalog-name {
+    padding: 0.5rem 1rem;
+    font-size: 24px;
+  }
   ol {
     width: 100%;
     box-sizing: border-box;
-    padding: 0 20px;
+    padding: 0 0 0 10px;
 
     li {
       width: 100%;
       padding: 0 10px;
-
+      max-width: 250px;
       a {
         display: block;
         height: inherit;
         line-height: 2.5rem;
         padding: 0 10px;
+        transition: background-color 0.3s ease;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         &:not(&.active):hover {
           color: aqua;
         }

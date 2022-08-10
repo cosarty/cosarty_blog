@@ -1,6 +1,6 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import dynamic from 'next/dynamic';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { getNotesKey, checkNotesKey, getNoteMeta, genNotesList, getClasstifyList, getTagsList } from '~/lib/api';
 import MdxWidget from '@/components/mdx-widget';
@@ -18,8 +18,9 @@ type BlogPostProps = MetaInfoType & {
 
 const BlogPost: FC<BlogPostProps> = ({ meta, posts, classtify, tags, changeCount }) => {
   const router = useRouter();
-  const [currentHash, setCurrentHash] = useState('');
+  const [currentHash, setCurrentHash] = useState<string | undefined>('');
   const [menu, setMenu] = useState<TitleDepType[]>([]);
+  const catalogRef = useRef<HTMLDivElement>(null);
 
   const count: noteNumType = {
     notes_count: len(posts),
@@ -47,6 +48,12 @@ const BlogPost: FC<BlogPostProps> = ({ meta, posts, classtify, tags, changeCount
   };
 
   const scrollHandlehlight = debounce(() => {
+    // 设置菜单定位
+    const b = catalogRef.current?.previousElementSibling?.getBoundingClientRect().bottom!;
+    const method = b < 60 ? 'add' : 'remove';
+    catalogRef.current?.classList[method](style['fixed']);
+
+    // 设置菜单激活
     const catalogs = Array.from(document.querySelectorAll('[class*=tag-h]'));
     if (currentHash === '') {
       setCurrentHash(catalogs[0]?.id);
@@ -57,6 +64,8 @@ const BlogPost: FC<BlogPostProps> = ({ meta, posts, classtify, tags, changeCount
         setCurrentHash(catalogs[idx].id);
         continue;
       }
+
+      //TODO 历史遗留
       if (maxScroll() && catalogs[idx].getBoundingClientRect().top > 10) {
         const hash = decodeURIComponent(location.hash).replace('#', '');
         const ci = catalogs.findIndex((c) => c.id === hash);
@@ -76,7 +85,7 @@ const BlogPost: FC<BlogPostProps> = ({ meta, posts, classtify, tags, changeCount
       const menu = (await res.json()) as TitleDepType[];
       setMenu(menu);
       // 初始化目录
-      setCurrentHash(document.querySelector('[class*=tag-h]')!.id);
+      setCurrentHash(document.querySelector('[class*=tag-h]')?.id);
     })();
     window.addEventListener('scroll', scrollHandlehlight);
     window.addEventListener('hashchange', hashChangeHendle);
@@ -106,6 +115,15 @@ const BlogPost: FC<BlogPostProps> = ({ meta, posts, classtify, tags, changeCount
     );
   };
 
+  const menuRender = (
+    <>
+      <div className={style['catalog-box']} ref={catalogRef}>
+        <div className={style['catalog-name']}>分类</div>
+        {Catalog(menu)}
+      </div>
+    </>
+  );
+
   return (
     <>
       <Layout
@@ -116,7 +134,7 @@ const BlogPost: FC<BlogPostProps> = ({ meta, posts, classtify, tags, changeCount
         showContent={false}
         count={count}
         // 渲染目录
-        postCustom={() => <div className={style['catalog-box']}>{Catalog(menu)}</div>}
+        postCustom={() => menuRender}
       >
         <>
           <div className={style['notes-wrapper']}>
