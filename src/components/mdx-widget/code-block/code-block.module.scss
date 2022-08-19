@@ -1,13 +1,14 @@
 .de-pre {
   margin: 1em 0;
-  width: 300px;
+  display: inline-block;
   background-color: #eff0f1;
 
   border-radius: 4px;
   overflow: auto;
   font-size: 14px;
   // margin-bottom: 4.1rem;
-  padding: 2rem 0 0.8rem 0.4rem;
+  padding: 2rem 0.5rem 0.8rem 0.4rem;
+  max-width: 100%;
   // padding: 2rem 0 0 0;
   border-radius: 12px;
   overflow: hidden;
